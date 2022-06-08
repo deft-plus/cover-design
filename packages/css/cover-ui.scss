@@ -1,0 +1,4 @@
+@use '../../node_modules/@cover-ui/sass/src/cover-ui.scss' as cui;
+
+$theme: cui.define-theme(cui.$default-theme, cui.$default-variables);
+@include cui.use-theme($theme);

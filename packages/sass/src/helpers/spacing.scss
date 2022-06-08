@@ -1,0 +1,68 @@
+// @use '../core/theming/themes/default-theme';
+
+// // All the different spacers for margins and paddings.
+// $spacing: (
+//   '0': default-theme.$space-0,
+//   '1': default-theme.$space-1,
+//   '2': default-theme.$space-2,
+//   '3': default-theme.$space-3,
+//   '4': default-theme.$space-4,
+//   '5': default-theme.$space-5,
+//   '6': default-theme.$space-6,
+//   'auto': auto,
+// );
+
+// // Use the $spacing variable to create shorthand margin and padding utility classes.
+// @each $key, $value in $spacing {
+//   .m {
+//     &-#{$key} {
+//       margin: $value !important;
+//     }
+//     &t-#{$key} {
+//       margin-top: $value !important;
+//     }
+//     &r-#{$key} {
+//       margin-right: $value !important;
+//     }
+//     &b-#{$key} {
+//       margin-bottom: $value !important;
+//     }
+//     &l-#{$key} {
+//       margin-left: $value !important;
+//     }
+//     &x-#{$key} {
+//       margin-right: $value !important;
+//       margin-left: $value !important;
+//     }
+//     &y-#{$key} {
+//       margin-top: $value !important;
+//       margin-bottom: $value !important;
+//     }
+//   }
+
+//   .p {
+//     &-#{$key} {
+//       padding: $value !important;
+//     }
+//     &t-#{$key} {
+//       padding-top: $value !important;
+//     }
+//     &r-#{$key} {
+//       padding-right: $value !important;
+//     }
+//     &b-#{$key} {
+//       padding-bottom: $value !important;
+//     }
+//     &l-#{$key} {
+//       padding-left: $value !important;
+//     }
+//     &x-#{$key} {
+//       padding-right: $value !important;
+//       padding-left: $value !important;
+//     }
+//     &y-#{$key} {
+//       padding-top: $value !important;
+//       padding-bottom: $value !important;
+//     }
+//   }
+// }

@@ -1,0 +1,11 @@
+@use 'sass:map';
+@use 'default-variables';
+
+/// Function will merge the given map with the default variables.
+@function define-variables($new-variables) {
+  @if $new-variables != null {
+    @return map.deep-merge(default-variables.$default-variables, $new-variables);
+  }
+
+  @return default-variables.$default-variables;
+}

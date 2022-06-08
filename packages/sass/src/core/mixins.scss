@@ -1,0 +1,37 @@
+// @use 'variables' as var;
+
+// // Adds content if the direction is right to left only.
+// @mixin ltr {
+//   @if not var.$rtl {
+//     @content;
+//   }
+// }
+
+// // Adds content if the direction is left to right only.
+// @mixin rtl {
+//   @if var.$rtl {
+//     @content;
+//   }
+// }
+
+// // Use this mixin to add a property to one side of the element and support rtl.
+// @mixin ltr-property($property, $spacing, $right: true) {
+//   $normal: if($right, 'right', 'left');
+//   $opposite: if($right, 'left', 'right');
+//   @if var.$rtl {
+//     #{$property}-#{$opposite}: $spacing;
+//   } @else {
+//     #{$property}-#{$normal}: $spacing;
+//   }
+// }
+
+// // Use this mixin to add a either right or left property to one side of the element and support rtl.
+// @mixin ltr-position($spacing, $right: true) {
+//   $normal: if($right, 'right', 'left');
+//   $opposite: if($right, 'left', 'right');
+//   @if var.$rtl {
+//     #{$opposite}: $spacing;
+//   } @else {
+//     #{$normal}: $spacing;
+//   }
+// }

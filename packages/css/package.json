@@ -1,0 +1,48 @@
+{
+  "name": "@cover-ui/css",
+  "version": "0.0.0",
+  "author": "Deft+",
+  "description": "Modern CSS framework based on Flexbox",
+  "main": "cover-ui.min.css",
+  "style": "cover-ui.min.css",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deft-plus/cover-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/deft-plus/cover-ui/issues"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "css",
+    "flexbox",
+    "grid",
+    "responsive",
+    "framework"
+  ],
+  "scripts": {
+    "watch": "yarn build:scss --watch",
+    "deploy": "yarn clean && yarn build:package",
+    "build:package": "yarn build:scss && yarn build:autoprefix && yarn build:cleancss",
+    "build:autoprefix": "postcss --use autoprefixer --map false --output cover-ui.css cover-ui.css",
+    "build:cleancss": "cleancss -o cover-ui.min.css cover-ui.css",
+    "build:scss": "sass --style=expanded cover-ui.scss cover-ui.css",
+    "clean": "rimraf cover-ui.min.css cover-ui.css cover-ui.css.map"
+  },
+  "dependencies": {
+    "@cover-ui/sass": "*"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.4",
+    "clean-css-cli": "^5.6.0",
+    "postcss-cli": "^9.1.0",
+    "sass": "^1.49.9"
+  },
+  "files": [
+    "css",
+    "scss",
+    "src/cover-ui.scss",
+    "LICENSE",
+    "README.md"
+  ]
+}

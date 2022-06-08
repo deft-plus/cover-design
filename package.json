@@ -1,0 +1,36 @@
+{
+  "name": "cover-ui",
+  "version": "0.0.1",
+  "author": "Deft+",
+  "description": "A set of UI Web Components with a modern and simple design for web development.",
+  "license": "Apache-2.0",
+  "private": true,
+  "homepage": "https://github.com/deft-plus/cover-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deft-plus/cover-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/deft-plus/cover-ui/issues"
+  },
+  "workspaces": [
+    "docs",
+    "packages/*"
+  ],
+  "packageManager": "yarn@1.22.17",
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "watch": "turbo run watch --parallel",
+    "deploy": "turbo run deploy",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1",
+    "turbo": "latest"
+  }
+}

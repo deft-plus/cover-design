@@ -1,0 +1,37 @@
+@use '@cover-ui/sass' as cui;
+
+// Defines the variables to use in the app.
+$variables: cui.define-variables(());
+
+// Defines the theme to use in the app.
+$theme: cui.define-theme(
+  (
+    light: (
+      primary: 'green',
+      secondary: 'pink',
+      info: 'teal',
+      success: 'light-green',
+      warning: 'orange',
+      error: 'pink',
+      text: 'scale-6',
+      background: 'white',
+      paper: 'scale-2',
+    ),
+    dark: (
+      primary: 'pink',
+      secondary: 'green',
+      info: 'teal',
+      success: 'light-green',
+      warning: 'orange',
+      error: 'pink',
+      text: 'scale-3',
+      background: 'black',
+      paper: 'scale-6',
+    ),
+  ),
+  $variables
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively.
+@include cui.use-theme($theme);

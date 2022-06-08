@@ -1,0 +1,47 @@
+@use 'sass:math';
+@use 'sass:map';
+// @use 'theming/default-theme';
+
+/// Function calculates if text needs to be light or dark depending on the background color passed.
+/// From this W3C document: http://www.webmasterworld.com/r.cgi?f=88&d=9769&url=http://www.w3.org/TR/AERT#color-contrast
+/// Color brightness is determined by the following formula:
+/// ((Red value X 299) + (Green value X 587) + (Blue value X 114)) / 1000
+// @function contrast-color($n) {
+//   $w: #fff;
+//   $brightness: math.round(math.div((red($n) * 299) + (green($n) * 587) + (blue($n) * 114), 1000));
+//   $lightness: math.round(math.div((red($w) * 299) + (green($w) * 587) + (blue($w) * 114), 1000));
+
+//   @if math.abs($brightness) < math.div($lightness, 2) {
+//     @return default-theme.$scale-1;
+//   } @else {
+//     @return default-theme.$scale-5;
+//   }
+// }
+
+// /// Function will change the alpha of the given color.
+// @function alpha($color, $alpha) {
+//   $red: red($color);
+//   $green: green($color);
+//   $blue: blue($color);
+//   @return rgba($red, $green, $blue, $alpha);
+// }
+
+/// Returns the value from the variables with the given path.
+@function var($theme, $root-name, $var-name) {
+  $root: map.get($theme, $root-name);
+
+  // If paletee return colors desctrutured.
+  @if $root-name == 'palette' or $root-name == 'theme' {
+    $color: map.get($root, $var-name);
+
+    $red: red($color);
+    $green: green($color);
+    $blue: blue($color);
+
+    @return $red, $green, $blue;
+  }
+  // Else just return the value.
+  @else {
+    @return map.get($root, $var-name);
+  }
+}

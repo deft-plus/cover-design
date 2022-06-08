@@ -1,0 +1,10 @@
+@use 'sass:map';
+// Components.
+@use '../base' as base;
+@use '../../forms/button' as button;
+
+/// Applies all of the mixins with the given theme.
+@mixin use-theme($theme) {
+  @include base.with-theme($theme);
+  @include button.with-theme($theme);
+}

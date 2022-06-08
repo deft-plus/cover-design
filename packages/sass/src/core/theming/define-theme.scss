@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use 'sass:string';
+@use 'themes/default-theme';
+@use 'default-variables.scss';
+
+/// Function will merge the given map with the default theme.
+@function define-theme(
+  $theme: default-theme.$default-theme,
+  $variables: default-variables.$default-variables
+) {
+  // In case the $theme does not have all of the fields it will add merge it with the default theme.
+  $theme-with-defaults: map.deep-merge(default-theme.$default-theme, $theme);
+
+  // Get the light and dark values from the theme.
+  $light-colors: map.get($theme-with-defaults, 'light');
+  $dark-colors: map.get($theme-with-defaults, 'dark');
+
+  // Get tge palette of the variables to grab the colors.
+  $palette: map.get($variables, 'palette');
+
+  // Map the fields for the light and dark color.
+  $light: -get-theme-map($palette, $light-colors, 'light');
+  $dark: -get-theme-map($palette, $dark-colors, 'dark');
+
+  // Merges both the light and dark theme into one map.
+  $built-theme: (
+    theme: map.merge($light, $dark),
+  );
+
+  // Merge the $variables with the new map which has the light and dark theme.
+  $result: map.deep-merge($variables, $built-theme);
+
+  @return $result;
+}
+
+/// Function will map all the fields to create the theme map.
+@function -get-theme-map($palette, $colors, $name) {
+  @return (
+    #{$name}-primary: -get-color($palette, $colors, 'primary'),
+    #{$name}-secondary: -get-color($palette, $colors, 'secondary'),
+    #{$name}-info: -get-color($palette, $colors, 'info'),
+    #{$name}-success: -get-color($palette, $colors, 'success'),
+    #{$name}-warning: -get-color($palette, $colors, 'warning'),
+    #{$name}-error: -get-color($palette, $colors, 'error'),
+    #{$name}-text: -get-color($palette, $colors, 'text'),
+    #{$name}-background: -get-color($palette, $colors, 'background'),
+    #{$name}-paper: -get-color($palette, $colors, 'paper'),
+    #{$name}-divider: -get-color($palette, $colors, 'divider')
+  );
+}
+
+/// Returns the colors for the given theme.
+@function -get-color($palette, $colors, $name) {
+  @return map.get($palette, map.get($colors, $name));
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@cover-ui/sass",
+  "version": "0.0.0",
+  "author": "Deft+",
+  "description": "Modern CSS framework based on Flexbox",
+  "main": "src/cover-ui.scss",
+  "style": "src/cover-ui.scss",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deft-plus/cover-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/deft-plus/cover-ui/issues"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "sass",
+    "flexbox",
+    "grid",
+    "responsive",
+    "framework"
+  ],
+  "devDependencies": {
+    "sass": "^1.49.9"
+  },
+  "files": [
+    "dist",
+    "scss",
+    "src/cover-ui.scss",
+    "LICENSE",
+    "README.md"
+  ]
+}
