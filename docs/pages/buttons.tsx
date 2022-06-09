@@ -169,7 +169,7 @@ export default function Docs() {
         <button className="cui-button is-error is-disabled">Error</button>
 
         <h4>Icons (with Boxicons)</h4>
-        <button className="cui-button">
+        <button className="cui-button-icon">
           <i className="bx bx-search"></i>
         </button>
       </div>

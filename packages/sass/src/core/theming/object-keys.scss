@@ -1,0 +1,34 @@
+// This document stores all the keys for the objects needed in the theming to allow a more strict
+// type checking with the maps and objects.
+
+/// List with all of the allowed keys to use in the theme.
+$theme-keys: 'primary', 'secondary', 'info', 'success', 'warning', 'error', 'text', 'soft-text',
+  'hint-text', 'background', 'paper', 'divider';
+
+/// List with all of the allowed keys to use in the variables.
+$variables-keys: 'palette', 'typography', 'spacing', 'breakpoints', 'z-index', 'miscellaneous';
+
+/// List with all of the allowed keys to use in the variables.palette.
+$variables-palette-keys: 'white', 'scale-1', 'scale-2', 'scale-3', 'scale-4', 'scale-5', 'scale-6',
+  'scale-7', 'black', 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan',
+  'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown',
+  'grey', 'blue-grey';
+
+/// List with all of the allowed keys to use in the variables.typography.
+$variables-typography-keys: 'font-family', 'render-mode', 'size-1', 'size-2', 'size-3', 'size-4',
+  'size-5', 'size-6', 'size-7', 'weight-light', 'weight-normal', 'weight-bold';
+
+/// List with all of the allowed keys to use in the variables.spacing.
+$variables-spacing-keys: 'space-0', 'space-1', 'space-2', 'space-3', 'space-4', 'space-5', 'space-6';
+
+/// List with all of the allowed keys to use in the variables.breakpoints.
+$variables-breakpoints-keys: 'breakpoint-xs', 'breakpoint-sm', 'breakpoint-md', 'breakpoint-lg',
+  'breakpoint-xl';
+
+/// List with all of the allowed keys to use in the variables.z-index.
+$variables-z-index-keys: 'z-index-app-bar', 'z-index-drawer', 'z-index-dialog',
+  'z-index-notification', 'z-index-tooltip';
+
+/// List with all of the allowed keys to use in the variables.miscellaneous.
+$variables-miscellaneous-keys: 'animation-function', 'animation-speed', 'radius-small',
+  'radius-normal', 'radius-large', 'radius-rounded';

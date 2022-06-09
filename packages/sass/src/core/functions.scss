@@ -1,5 +1,7 @@
 @use 'sass:math';
 @use 'sass:map';
+@use 'sass:list';
+@use 'theming/object-keys';
 // @use 'theming/default-theme';
 
 /// Function calculates if text needs to be light or dark depending on the background color passed.
@@ -44,4 +46,28 @@
   @else {
     @return map.get($root, $var-name);
   }
+}
+
+/// Extracts a color from a theme or throws an error if it doesn't exist.
+/// @param {Map} $theme The theme from which to extract a color.
+/// @param {String} $color-name The name of the variable to get (Can be from the palette or the theme).
+@function get-color($theme, $color-name) {
+  $palette: map.get($theme, 'palette');
+  $theme: map.get($theme, 'theme');
+
+  // Check if the color is in the palette.
+  @if map.has-key($palette, $color-name) {
+    @return destructure-color(map.get($palette, $color-name));
+  }
+  // Check if theme has the color.
+  @else if list.index(object-keys.$theme-keys, $color-name) {
+    @return 'var(--#{$color-name}-color)';
+  }
+
+  @error 'Color "' + $color-name + '" does not exist in theme. Available colors are: ' + map.keys($palette) + ', ' + object-keys.$theme-keys;
+}
+
+@function destructure-color($color) {
+  // @return $color;
+  @return red($color), green($color), blue($color);
 }

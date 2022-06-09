@@ -1,55 +1,77 @@
 @use 'sass:map';
 @use 'sass:string';
-@use 'themes/default-theme';
-@use 'default-variables.scss';
+@use 'sass:list';
+@use 'object-keys';
+@use 'default-variables';
+@use 'prebuilt-themes/default-theme';
 
-/// Function will merge the given map with the default theme.
+/// Creates a complete theme object with all the configuration given to use in the use-theme mixin.
+/// @param {Map} $theme The theme configuration object (See 'core/theming/object-keys/$theme-keys' for the map structure).
+/// @param {Map} $variables The variables configuarion object (See 'core/theming/object-keys/$variable-keys' for the map structure).
+/// @return {Map} A complete Cover UI theme configuration object.
 @function define-theme(
   $theme: default-theme.$default-theme,
   $variables: default-variables.$default-variables
 ) {
-  // In case the $theme does not have all of the fields it will add merge it with the default theme.
+  // It will merge params with the default ones. This is done in case the params do not have all of the fields.
   $theme-with-defaults: map.deep-merge(default-theme.$default-theme, $theme);
+  $variables-with-defaults: map.deep-merge(default-variables.$default-variables, $variables);
 
-  // Get the light and dark values from the theme.
-  $light-colors: map.get($theme-with-defaults, 'light');
-  $dark-colors: map.get($theme-with-defaults, 'dark');
-
-  // Get tge palette of the variables to grab the colors.
-  $palette: map.get($variables, 'palette');
-
-  // Map the fields for the light and dark color.
-  $light: -get-theme-map($palette, $light-colors, 'light');
-  $dark: -get-theme-map($palette, $dark-colors, 'dark');
-
-  // Merges both the light and dark theme into one map.
-  $built-theme: (
-    theme: map.merge($light, $dark),
+  // Merges default light theme fields with the light theme fields passed.
+  $light-colors: map.deep-merge(
+    map.get(default-theme.$default-theme, 'light'),
+    map.get($theme-with-defaults, 'light')
+  );
+  // Merges default dark theme fields with the dark theme fields passed.
+  $dark-colors: map.deep-merge(
+    map.get(default-theme.$default-theme, 'dark'),
+    map.get($theme-with-defaults, 'dark')
   );
 
-  // Merge the $variables with the new map which has the light and dark theme.
-  $result: map.deep-merge($variables, $built-theme);
+  // Map the theme fields for the light and dark colors.
+  $light: -get-theme-map($light-colors, 'light');
+  $dark: -get-theme-map($dark-colors, 'dark');
+
+  $built-theme: (
+    // Merges both the light and dark theme into one map.
+    theme: map.merge($light, $dark)
+  );
+
+  // Merge the variables with the theme to create a complete theme.
+  $result: map.deep-merge($built-theme, $variables-with-defaults);
 
   @return $result;
 }
 
-/// Function will map all the fields to create the theme map.
-@function -get-theme-map($palette, $colors, $name) {
-  @return (
-    #{$name}-primary: -get-color($palette, $colors, 'primary'),
-    #{$name}-secondary: -get-color($palette, $colors, 'secondary'),
-    #{$name}-info: -get-color($palette, $colors, 'info'),
-    #{$name}-success: -get-color($palette, $colors, 'success'),
-    #{$name}-warning: -get-color($palette, $colors, 'warning'),
-    #{$name}-error: -get-color($palette, $colors, 'error'),
-    #{$name}-text: -get-color($palette, $colors, 'text'),
-    #{$name}-background: -get-color($palette, $colors, 'background'),
-    #{$name}-paper: -get-color($palette, $colors, 'paper'),
-    #{$name}-divider: -get-color($palette, $colors, 'divider')
-  );
+/// Creates the colors for a given mode with the given colors to use in the theme. The values will
+/// be returned as CSS variables.
+/// @param {Map} $colors The theme map.
+/// @param {String} $mode The color type to get.
+/// @return {Map} A map with the colors from the palette in the theme.
+@function -get-theme-map($colors, $mode) {
+  $theme-map: (); // Empty map to store the theme.
+
+  // Loop over each key to map the CSS variables into the $theme-map variable.
+  @each $key in object-keys.$theme-keys {
+    $theme-map: map.set($theme-map, #{$mode}-#{$key}, -get-color($colors, $key));
+  }
+
+  @return $theme-map;
 }
 
-/// Returns the colors for the given theme.
-@function -get-color($palette, $colors, $name) {
-  @return map.get($palette, map.get($colors, $name));
+/// Creates the CSS variable for a given color type and color name.
+/// @param {Map} $colors The theme map to get the color from.
+/// @param {String} $color-name The color name to get from the $colors.
+/// @return {String} The CSS variable for the color.
+@function -get-color($colors, $name) {
+  // Get the color to set in the map.
+  $color-name: map.get($colors, $name);
+
+  // Check if the color-name is an allowed keys for the palette.
+  @if not list.index(object-keys.$variables-palette-keys, $color-name) {
+    @error 'The color "' + $color-name + '" can\'t be used in the theme. Available colors are: ' + object-keys.$variables-palette-keys;
+  }
+
+  // Return the color as a css variable.
+  @return 'var(--#{$color-name}-color)';
 }

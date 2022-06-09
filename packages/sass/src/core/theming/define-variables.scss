@@ -1,11 +1,13 @@
 @use 'sass:map';
 @use 'default-variables';
 
-/// Function will merge the given map with the default variables.
-@function define-variables($new-variables) {
-  @if $new-variables != null {
-    @return map.deep-merge(default-variables.$default-variables, $new-variables);
-  }
+/// Creates a complete object with all the variables to use in the theme.
+/// @param {Map} $variables The variables to use in the theme.
+/// @return {Map} The complete object with all the variables needed.
+@function define-variables($variables: default-variables.$default-variables) {
+  // It will merge the variables with the default ones. This is done in case the variables passed
+  // do not have all of the fields.
+  $variables-with-defaults: map.deep-merge(default-variables.$default-variables, $variables);
 
-  @return default-variables.$default-variables;
+  @return $variables-with-defaults;
 }

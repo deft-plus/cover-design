@@ -1,12 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css");
 /***
   The new CSS reset - version 1.6.1 (last updated 25.5.2022)
   GitHub page: https://github.com/elad2412/the-new-css-reset
 ***/
 /* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property.
- - The "symbol *" part is to solve Firefox SVG sprite bug.
- */
+- The "symbol *" part is to solve Firefox SVG sprite bug.
+*/
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css");
+/*! @cover-ui/css | Apache 2.0 License | github.com/deft-plus/cover-ui */
 *:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
   all: unset;
   display: revert;
@@ -59,13 +60,13 @@ meter {
 }
 
 /* Fix the feature of 'hidden' attribute.
- - Display:revert; revert to element instead of attribute. */
+- Display:revert; revert to element instead of attribute. */
 :where([hidden]) {
   display: none;
 }
 
 /* Revert for bug in Chromium browsers.
- - Fix for the content editable attribute will work properly. */
+- Fix for the content editable attribute will work properly. */
 :where([contenteditable]:not([contenteditable="false"])) {
   -moz-user-modify: read-write;
   -webkit-user-modify: read-write;
@@ -78,24 +79,90 @@ meter {
   -webkit-user-drag: element;
 }
 
-/*! @cover-ui/css | Apache 2.0 License | github.com/deft-plus/cover-ui */
 :root {
-  font-family: 'Barlow', BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  --white-color: 255, 255, 255;
+  --scale-1-color: 250, 250, 250;
+  --scale-2-color: 216, 216, 216;
+  --scale-3-color: 187, 187, 187;
+  --scale-4-color: 143, 143, 143;
+  --scale-5-color: 90, 90, 90;
+  --scale-6-color: 59, 59, 59;
+  --scale-7-color: 33, 33, 33;
+  --black-color: 0, 0, 0;
+  --red-color: 211, 47, 47;
+  --pink-color: 194, 24, 91;
+  --purple-color: 123, 31, 162;
+  --deep-purple-color: 81, 45, 168;
+  --indigo-color: 48, 63, 159;
+  --blue-color: 25, 118, 210;
+  --light-blue-color: 2, 136, 209;
+  --cyan-color: 0, 151, 167;
+  --teal-color: 0, 121, 107;
+  --green-color: 56, 142, 60;
+  --light-green-color: 104, 159, 56;
+  --lime-color: 175, 180, 43;
+  --yellow-color: 253, 216, 53;
+  --amber-color: 255, 179, 0;
+  --orange-color: 245, 124, 0;
+  --deep-orange-color: 230, 74, 25;
+  --brown-color: 93, 64, 55;
+  --grey-color: 97, 97, 97;
+  --blue-grey-color: 69, 90, 100;
+  --font-family: 'Barlow', 'Roboto', 'Segoe UI', 'Ubuntu', -apple-system, sans-serif;
+  --render-mode: optimizeLegibility;
+  --size-1: 3rem;
+  --size-2: 2.5rem;
+  --size-3: 2rem;
+  --size-4: 1.5rem;
+  --size-5: 1.25rem;
+  --size-6: 1rem;
+  --size-7: 0.75rem;
+  --weight-light: 100;
+  --weight-normal: 400;
+  --weight-bold: 700;
+  --primary-color: var(--pink-color);
+  --secondary-color: var(--green-color);
+  --info-color: var(--teal-color);
+  --success-color: var(--light-green-color);
+  --warning-color: var(--orange-color);
+  --error-color: var(--pink-color);
+  --text-color: var(--scale-5-color);
+  --soft-text-color: var(--scale-7-color);
+  --hint-text-color: var(--scale-7-color);
+  --background-color: var(--white-color);
+  --paper-color: var(--scale-2-color);
+  --divider-color: var(--scale-1-color);
+  font-family: var(--font-family);
+}
+
+html,
+body {
+  color: rgb(var(--text-color));
+  background-color: rgb(var(--background-color));
 }
 
 @media (prefers-color-scheme: dark) {
-  button.cui-button,
-a.cui-button {
-    --text-color: #d8d8d8;
+  :root {
+    --primary-color: var(--green-color);
+    --secondary-color: var(--pink-color);
+    --info-color: var(--teal-color);
+    --success-color: var(--light-green-color);
+    --warning-color: var(--orange-color);
+    --error-color: var(--pink-color);
+    --text-color: var(--scale-3-color);
+    --soft-text-color: var(--scale-7-color);
+    --hint-text-color: var(--scale-7-color);
+    --background-color: var(--black-color);
+    --paper-color: var(--scale-6-color);
+    --divider-color: var(--scale-7-color);
   }
 }
 /* Button styles */
 button.cui-button,
 a.cui-button {
-  --text-color: #3b3b3b;
-  --background-color: 243, 243, 243;
-  --font-size: 1rem;
-  --font: "Barlow", "Roboto", "Segoe UI", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  --element-text-color: var(--text-color);
+  --element-background-color: var(--background-color);
+  --element-font-size: 1rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -103,15 +170,15 @@ a.cui-button {
   outline: none;
   white-space: nowrap;
   user-select: none;
-  font-size: var(--font-size);
+  font-size: var(--element-font-size);
   padding: 9px 18px;
   border-radius: 3px;
   border: 1px solid transparent;
-  font-family: var(--font);
+  font-family: var(--font-family);
   transition: background 0.1s linear;
   -webkit-tap-highlight-color: transparent;
-  background-color: rgba(var(--background-color), 0.08);
-  color: rgb(var(--text-color));
+  background-color: rgba(var(--element-background-color), 0.08);
+  color: rgb(var(--element-text-color));
   position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
@@ -126,7 +193,7 @@ a.cui-button::after {
   top: 0;
   left: 0;
   pointer-events: none;
-  background-image: radial-gradient(circle, rgb(var(--text-color)) 10%, transparent 10.01%);
+  background-image: radial-gradient(circle, rgb(var(--element-text-color)) 10%, transparent 10.01%);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 1500%;
@@ -141,11 +208,11 @@ a.cui-button:disabled {
 }
 button.cui-button:hover,
 a.cui-button:hover {
-  background-color: rgba(var(--background-color), 0.15);
+  background-color: rgba(var(--element-background-color), 0.15);
 }
 button.cui-button:active,
 a.cui-button:active {
-  background-color: rgba(var(--background-color), 0.27);
+  background-color: rgba(var(--element-background-color), 0.27);
 }
 button.cui-button:active::after,
 a.cui-button:active::after {
@@ -165,9 +232,82 @@ a.cui-button i {
   speak: none;
   -webkit-font-smoothing: antialiased;
 }
-button.cui-button.icon,
-a.cui-button.icon {
+
+/* Button styles */
+button.cui-button-icon,
+a.cui-button-icon {
+  --element-text-color: var(--text-color);
+  --element-background-color: var(--background-color);
+  --element-font-size: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  user-select: none;
+  font-size: var(--element-font-size);
+  padding: 9px 18px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  font-family: var(--font-family);
+  transition: background 0.1s linear;
+  -webkit-tap-highlight-color: transparent;
+  background-color: rgba(var(--element-background-color), 0.08);
+  color: rgb(var(--element-text-color));
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
   padding: 7px;
+}
+button.cui-button-icon::after,
+a.cui-button-icon::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(var(--element-text-color)) 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1500%;
+  opacity: 0;
+  transition: background 0.4s, opacity 1s;
+}
+button.cui-button-icon:disabled,
+a.cui-button-icon:disabled {
+  background-color: #e1e1e1 !important;
+  color: #868686 !important;
+  cursor: default !important;
+}
+button.cui-button-icon:hover,
+a.cui-button-icon:hover {
+  background-color: rgba(var(--element-background-color), 0.15);
+}
+button.cui-button-icon:active,
+a.cui-button-icon:active {
+  background-color: rgba(var(--element-background-color), 0.27);
+}
+button.cui-button-icon:active::after,
+a.cui-button-icon:active::after {
+  background-size: 0%;
+  opacity: 0.35;
+  transition-duration: 0s;
+}
+button.cui-button-icon i,
+a.cui-button-icon i {
+  font-family: "boxicons" !important;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  display: inline-block;
+  text-transform: none;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 /*# sourceMappingURL=cover-ui.css.map */

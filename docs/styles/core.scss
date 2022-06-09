@@ -3,35 +3,39 @@
 // Defines the variables to use in the app.
 $variables: cui.define-variables(());
 
-// Defines the theme to use in the app.
-$theme: cui.define-theme(
-  (
-    light: (
-      primary: 'green',
-      secondary: 'pink',
-      info: 'teal',
-      success: 'light-green',
-      warning: 'orange',
-      error: 'pink',
-      text: 'scale-6',
-      background: 'white',
-      paper: 'scale-2',
-    ),
-    dark: (
-      primary: 'pink',
-      secondary: 'green',
-      info: 'teal',
-      success: 'light-green',
-      warning: 'orange',
-      error: 'pink',
-      text: 'scale-3',
-      background: 'black',
-      paper: 'scale-6',
-    ),
+// $theme: cui.$default-theme;
+$theme: (
+  light: (
+    primary: 'red',
+    secondary: 'pink',
+    info: 'teal',
+    success: 'light-green',
+    warning: 'orange',
+    error: 'pink',
+    text: 'scale-7',
+    soft-text: 'scale-7',
+    hint-text: 'scale-7',
+    background: 'white',
+    paper: 'scale-1',
   ),
-  $variables
+  dark: (
+    primary: 'pink',
+    secondary: 'green',
+    info: 'teal',
+    success: 'light-green',
+    warning: 'orange',
+    error: 'pink',
+    text: 'scale-3',
+    soft-text: 'scale-1',
+    hint-text: 'scale-1',
+    background: 'black',
+    paper: 'scale-6',
+  ),
 );
+
+// Defines the theme to use in the app.
+$defined-theme: cui.define-theme($theme, $variables);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively.
-@include cui.use-theme($theme);
+@include cui.use-theme($defined-theme);

@@ -1,5 +1,8 @@
+// This file will apply all the styles to all of the elements, the convetion is to use a mixin with
+// the name 'with-theme' in each element where you receive the theme to use it.
+
 @use 'sass:map';
-// Components.
+// Elements.
 @use '../base' as base;
 @use '../../forms/button' as button;
 

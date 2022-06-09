@@ -9,8 +9,8 @@ $default-variables: (
     'scale-5': #5a5a5a,
     'scale-6': #3b3b3b,
     'scale-7': #212121,
-    // Colors
     'black': #000000,
+    // Colors
     'red': #d32f2f,
     'pink': #c2185b,
     'purple': #7b1fa2,
@@ -32,8 +32,7 @@ $default-variables: (
     'blue-grey': #455a64,
   ),
   'typography': (
-    'font-family':
-      "'Barlow', BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+    'font-family': "'Barlow', 'Roboto', 'Segoe UI', 'Ubuntu', -apple-system, sans-serif",
     'render-mode': optimizeLegibility,
     // Size
     'size-1': 1rem * 3,
@@ -49,7 +48,7 @@ $default-variables: (
     'weight-bold': 700,
   ),
   'spacing': (
-    'space-0': 1rem * 0,
+    'space-0': 0,
     'space-1': 1rem * 0.45,
     'space-2': 1rem * 0.9,
     'space-3': 1rem * 1.25,

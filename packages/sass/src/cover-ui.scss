@@ -5,7 +5,9 @@
 @forward 'core/theming/default-variables.scss';
 @forward 'core/theming/define-variables.scss';
 @forward 'core/theming/define-theme';
+
+// All the styling happens in this file.
 @forward 'core/theming/use-theme';
 
-// Themes
-@forward 'core/theming/themes/default-theme';
+// Pre-built themes
+@forward 'core/theming/prebuilt-themes';
