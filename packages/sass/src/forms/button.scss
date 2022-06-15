@@ -1,8 +1,8 @@
 @use '../core/functions' as f;
+@use '../core/theming/object-keys' as object-keys;
 
 @mixin base-button-styles($theme) {
-  --element-text-color: #{f.get-color($theme, 'text')};
-  --element-background-color: #{f.get-color($theme, 'background')};
+  --element-color: var(--text-color);
   --element-font-size: 1rem;
 
   display: inline-flex;
@@ -13,19 +13,20 @@
   white-space: nowrap;
   user-select: none;
   font-size: var(--element-font-size);
-  padding: 9px 18px;
+  padding: calc(var(--element-font-size) * 0.4) calc(var(--element-font-size) * 1.5);
   border-radius: 3px;
   border: 1px solid transparent;
   font-family: var(--font-family);
-  transition: background 0.1s linear;
+  transition: background 0.2s linear;
   -webkit-tap-highlight-color: transparent;
-  background-color: rgba(var(--element-background-color), 0.08);
-  color: rgb(var(--element-text-color));
+  background-color: rgba(var(--element-color), 0.04);
+  color: rgb(var(--element-color));
   // Ripple effect
   position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
-  &::after {
+
+  &::before {
     content: '';
     display: block;
     position: absolute;
@@ -34,31 +35,102 @@
     top: 0;
     left: 0;
     pointer-events: none;
-    background-image: radial-gradient(
-      circle,
-      rgb(var(--element-text-color)) 10%,
-      transparent 10.01%
-    );
+    background-image: radial-gradient(circle, rgb(var(--element-color)) 10%, transparent 10.01%);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 1500%;
     opacity: 0;
-    transition: background 0.4s, opacity 1s;
+    transition: background 0.6s, opacity 1s;
+    z-index: -1;
   }
-  &:disabled {
-    background-color: rgb(225, 225, 225) !important;
-    color: rgb(134, 134, 134) !important;
-    cursor: default !important;
+
+  &.is-rounded {
+    border-radius: 99999px;
   }
+
+  &.is-contained {
+    border: 1px solid transparent;
+    background-color: rgba(var(--element-color), 0.9);
+    color: rgb(var(--text-color));
+
+    &:hover {
+      background-color: rgba(var(--element-color), 0.8);
+    }
+
+    &:active {
+      background-color: rgba(var(--element-color), 0.7);
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &:disabled {
+      background-color: rgb(var(--text-color), 0.6) !important;
+      color: rgba(var(--text-color), 0.6);
+      cursor: default;
+      &::before {
+        opacity: 0;
+      }
+    }
+  }
+
   &:hover {
-    background-color: rgba(var(--element-background-color), 0.15);
+    background-color: rgba(var(--element-color), 0.15);
   }
+
+  &:focus-visible {
+    border: 2px solid rgb(var(--text-color));
+  }
+
   &:active {
-    background-color: rgba(var(--element-background-color), 0.27);
-    &::after {
+    background-color: rgba(var(--element-color), 0.27);
+    &::before {
       background-size: 0%;
       opacity: 0.35;
       transition-duration: 0s;
+    }
+  }
+
+  &:disabled {
+    background-color: rgb(var(--text-color), 0.09) !important;
+    color: rgba(var(--text-color), 0.3);
+    cursor: default;
+    &::before {
+      opacity: 0;
+    }
+  }
+
+  &.is-outlined {
+    border: 1px solid rgb(var(--element-color));
+    background-color: transparent;
+    color: rgb(var(--element-color));
+
+    &:disabled {
+      background-color: transparent !important;
+      border: 1px solid rgba(var(--text-color), 0.3);
+      color: rgba(var(--text-color), 0.3);
+    }
+  }
+
+  &.is-loading {
+    color: transparent !important;
+    position: relative;
+    background-color: rgba(var(--element-color), 0.04);
+    cursor: default;
+    border: 1px solid transparent;
+
+    &::before {
+      left: calc(50% - (1em * 0.5));
+      top: calc(50% - (1em * 0.5));
+      height: 1em;
+      width: 1em;
+      animation: spin-around 0.8s infinite linear;
+      border: 2px solid rgb(var(--hint-text-color));
+      border-radius: 50%;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      background-image: none;
+      opacity: 1;
     }
   }
 
@@ -78,10 +150,34 @@
 
 /// Button styles.
 @mixin with-theme($theme) {
+  @keyframes spin-around {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+
   /* Button styles */
   button.cui-button,
   a.cui-button {
     @include base-button-styles($theme);
+
+    // Adds the colors for the buttons.
+    @each $color in object-keys.$color-keys {
+      &.is-#{$color} {
+        --element-color: #{f.get-color($theme, $color)};
+        --element-color: #{f.get-color($theme, $color)};
+      }
+    }
+
+    // Adds the colors for the buttons.
+    @each $size in object-keys.$size-keys {
+      &.is-#{$size} {
+        --element-font-size: 2rem;
+      }
+    }
   }
 
   /* Button styles */
@@ -89,5 +185,16 @@
   a.cui-button-icon {
     @include base-button-styles($theme);
     padding: 7px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    button.cui-button,
+    a.cui-button {
+      background-color: rgba(var(--element-color), 0.1);
+
+      &.is-loading {
+        background-color: rgba(var(--element-color), 0.1);
+      }
+    }
   }
 }

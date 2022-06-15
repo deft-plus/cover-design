@@ -1,0 +1,50 @@
+@use 'sass:string';
+@use 'functions' as f;
+
+@mixin apply($theme) {
+  :root,
+  ::before,
+  ::after {
+    // Loop over light theme color to create css variables.
+    @each $root-key, $root in $theme {
+      @if $root-key == 'theme' {
+        @each $color-key, $color in $root {
+          @if string.index($color-key, 'light-') != null {
+            $color-name: string.slice($color-key, string.index($color-key, '-') + 1);
+            --#{$color-name}-color: #{$color};
+          }
+        }
+      }
+      // Palette colors.
+      @else if $root-key == 'palette' {
+        @each $color-key, $color in $root {
+          --#{$color-key}-color: #{f.destructure-color($color)};
+        }
+      }
+      // Everything else.
+      @else if $root-key != 'breakpoints' {
+        @each $key, $value in $root {
+          --#{$key}: #{$value};
+        }
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root,
+    ::before,
+    ::after {
+      // Loop over dark theme color to create css variables.
+      @each $root-key, $root in $theme {
+        @if $root-key == 'theme' {
+          @each $color-key, $color in $root {
+            @if string.index($color-key, 'dark-') != null {
+              $color-name: string.slice($color-key, string.index($color-key, '-') + 1);
+              --#{$color-name}-color: #{$color};
+            }
+          }
+        }
+      }
+    }
+  }
+}

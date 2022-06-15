@@ -88,7 +88,9 @@ export default function Docs() {
         <h4>Variants</h4>
 
         <h5>Outlined</h5>
-        <button className="cui-button is-primary is-outlined">Primary</button>
+        <button className="cui-button is-primary is-outlined" disabled>
+          Primary
+        </button>
         <button className="cui-button is-secondary is-outlined">Secondary</button>
         <button className="cui-button is-info is-outlined">Info</button>
         <button className="cui-button is-success is-outlined">Success</button>
@@ -96,7 +98,9 @@ export default function Docs() {
         <button className="cui-button is-error is-outlined">Error</button>
 
         <h5>Contained</h5>
-        <button className="cui-button is-primary is-contained">Primary</button>
+        <button className="cui-button is-primary is-contained" disabled>
+          Primary
+        </button>
         <button className="cui-button is-secondary is-contained">Secondary</button>
         <button className="cui-button is-info is-contained">Info</button>
         <button className="cui-button is-success is-contained">Success</button>
@@ -105,9 +109,11 @@ export default function Docs() {
 
         <h4>Round</h4>
         <button className="cui-button is-primary is-rounded">Primary</button>
-        <button className="cui-button is-secondary is-rounded">Secondary</button>
-        <button className="cui-button is-info is-rounded">Info</button>
-        <button className="cui-button is-success is-rounded">Success</button>
+        <button className="cui-button is-secondary is-rounded" disabled>
+          Secondary
+        </button>
+        <button className="cui-button is-info is-rounded is-outlined">Info</button>
+        <button className="cui-button is-success is-rounded is-contained">Success</button>
         <button className="cui-button is-warning is-rounded">Warning</button>
         <button className="cui-button is-error is-rounded">Error</button>
 
@@ -128,30 +134,6 @@ export default function Docs() {
         <button className="cui-button is-warning">Warning</button>
         <button className="cui-button is-error">Error</button>
 
-        <h5>Hover</h5>
-        <button className="cui-button is-primary is-hover">Primary</button>
-        <button className="cui-button is-secondary is-hover">Secondary</button>
-        <button className="cui-button is-info is-hover">Info</button>
-        <button className="cui-button is-success is-hover">Success</button>
-        <button className="cui-button is-warning is-hover">Warning</button>
-        <button className="cui-button is-error is-hover">Error</button>
-
-        <h5>Focus</h5>
-        <button className="cui-button is-primary is-focus">Primary</button>
-        <button className="cui-button is-secondary is-focus">Secondary</button>
-        <button className="cui-button is-info is-focus">Info</button>
-        <button className="cui-button is-success is-focus">Success</button>
-        <button className="cui-button is-warning is-focus">Warning</button>
-        <button className="cui-button is-error is-focus">Error</button>
-
-        <h5>Active</h5>
-        <button className="cui-button is-primary is-active">Primary</button>
-        <button className="cui-button is-secondary is-active">Secondary</button>
-        <button className="cui-button is-info is-active">Info</button>
-        <button className="cui-button is-success is-active">Success</button>
-        <button className="cui-button is-warning is-active">Warning</button>
-        <button className="cui-button is-error is-active">Error</button>
-
         <h5>Loading</h5>
         <button className="cui-button is-primary is-loading">Primary</button>
         <button className="cui-button is-secondary is-loading">Secondary</button>
@@ -161,12 +143,24 @@ export default function Docs() {
         <button className="cui-button is-error is-loading">Error</button>
 
         <h5>Disabled</h5>
-        <button className="cui-button is-primary is-disabled">Primary</button>
-        <button className="cui-button is-secondary is-disabled">Secondary</button>
-        <button className="cui-button is-info is-disabled">Info</button>
-        <button className="cui-button is-success is-disabled">Success</button>
-        <button className="cui-button is-warning is-disabled">Warning</button>
-        <button className="cui-button is-error is-disabled">Error</button>
+        <button className="cui-button is-primary" disabled>
+          Primary
+        </button>
+        <button className="cui-button is-secondary" disabled>
+          Secondary
+        </button>
+        <button className="cui-button is-info" disabled>
+          Info
+        </button>
+        <button className="cui-button is-success" disabled>
+          Success
+        </button>
+        <button className="cui-button is-warning" disabled>
+          Warning
+        </button>
+        <button className="cui-button is-error" disabled>
+          Error
+        </button>
 
         <h4>Icons (with Boxicons)</h4>
         <button className="cui-button-icon">
