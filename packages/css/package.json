@@ -5,6 +5,15 @@
   "description": "Modern CSS framework based on Flexbox",
   "main": "cover-ui.min.css",
   "style": "cover-ui.min.css",
+  "scripts": {
+    "watch": "yarn build:scss --watch",
+    "deploy": "yarn clean && yarn build:package",
+    "build:package": "yarn build:scss && yarn build:autoprefix && yarn build:cleancss",
+    "build:autoprefix": "postcss --use autoprefixer --map false --output cover-ui.css cover-ui.css",
+    "build:cleancss": "cleancss -o cover-ui.min.css cover-ui.css",
+    "build:scss": "sass --style=expanded cover-ui.scss cover-ui.css",
+    "clean": "rimraf cover-ui.min.css cover-ui.css cover-ui.css.map"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/deft-plus/cover-ui"
@@ -20,15 +29,13 @@
     "responsive",
     "framework"
   ],
-  "scripts": {
-    "watch": "yarn build:scss --watch",
-    "deploy": "yarn clean && yarn build:package",
-    "build:package": "yarn build:scss && yarn build:autoprefix && yarn build:cleancss",
-    "build:autoprefix": "postcss --use autoprefixer --map false --output cover-ui.css cover-ui.css",
-    "build:cleancss": "cleancss -o cover-ui.min.css cover-ui.css",
-    "build:scss": "sass --style=expanded cover-ui.scss cover-ui.css",
-    "clean": "rimraf cover-ui.min.css cover-ui.css cover-ui.css.map"
-  },
+  "files": [
+    "cover-ui.css",
+    "cover-ui.css.map",
+    "cover-ui.min.css",
+    "LICENSE",
+    "README.md"
+  ],
   "dependencies": {
     "@cover-ui/sass": "*"
   },
@@ -37,12 +44,5 @@
     "clean-css-cli": "^5.6.0",
     "postcss-cli": "^9.1.0",
     "sass": "^1.49.9"
-  },
-  "files": [
-    "css",
-    "scss",
-    "src/cover-ui.scss",
-    "LICENSE",
-    "README.md"
-  ]
+  }
 }

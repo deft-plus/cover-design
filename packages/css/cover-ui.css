@@ -138,9 +138,9 @@ meter {
   --z-index-tooltip: 1300;
   --animation-function: cubic-bezier(0.16, 1, 0.29, 0.99);
   --animation-speed: 667ms;
-  --radius-small: 2px;
-  --radius-normal: 4px;
-  --radius-large: 6px;
+  --radius-small: 3px;
+  --radius-normal: 5px;
+  --radius-large: 7px;
   --radius-rounded: 9999px;
   --primary-color: var(--teal-color);
   --secondary-color: var(--green-color);
@@ -206,13 +206,13 @@ a.cui-button {
   user-select: none;
   font-size: var(--element-font-size);
   padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
-  border-radius: 3px;
+  border-radius: var(--radius-small);
   border: 1px solid transparent;
   font-family: var(--font-family);
   transition: background 0.2s linear;
-  -webkit-tap-highlight-color: transparent;
   background-color: rgba(var(--element-color), 0.04);
   color: rgb(var(--element-color));
+  -webkit-tap-highlight-color: transparent;
   position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
@@ -220,8 +220,8 @@ a.cui-button {
 button.cui-button::before,
 a.cui-button::before {
   content: "";
-  display: block;
   position: absolute;
+  display: block;
   width: 100%;
   height: 100%;
   top: 0;
@@ -232,12 +232,12 @@ a.cui-button::before {
   background-position: center;
   background-size: 1500%;
   opacity: 0;
-  transition: background 0.6s, opacity 1s;
+  transition: background 0.5s, opacity 1s;
   z-index: -1;
 }
 button.cui-button.is-rounded,
 a.cui-button.is-rounded {
-  border-radius: 99999px;
+  border-radius: var(--radius-rounded);
 }
 button.cui-button.is-contained,
 a.cui-button.is-contained {
@@ -267,16 +267,6 @@ button.cui-button.is-contained:disabled::before,
 a.cui-button.is-contained:disabled::before {
   opacity: 0;
 }
-button.cui-button:disabled,
-a.cui-button:disabled {
-  background-color: rgb(var(--text-color), 0.09) !important;
-  color: rgba(var(--text-color), 0.3);
-  cursor: default;
-}
-button.cui-button:disabled::before,
-a.cui-button:disabled::before {
-  opacity: 0;
-}
 button.cui-button.is-outlined,
 a.cui-button.is-outlined {
   border: 1px solid rgb(var(--element-color));
@@ -285,8 +275,14 @@ a.cui-button.is-outlined {
 }
 button.cui-button.is-outlined:disabled,
 a.cui-button.is-outlined:disabled {
+  background-color: rgb(var(--text-color), 0) !important;
   border: 1px solid rgba(var(--text-color), 0.3);
   color: rgba(var(--text-color), 0.3);
+  cursor: default;
+}
+button.cui-button.is-outlined:disabled::before,
+a.cui-button.is-outlined:disabled::before {
+  opacity: 0;
 }
 button.cui-button:hover,
 a.cui-button:hover {
@@ -306,11 +302,20 @@ a.cui-button:active::before {
   opacity: 0.35;
   transition-duration: 0s;
 }
+button.cui-button:disabled,
+a.cui-button:disabled {
+  background-color: rgb(var(--text-color), 0.09) !important;
+  color: rgba(var(--text-color), 0.3);
+  cursor: default;
+}
+button.cui-button:disabled::before,
+a.cui-button:disabled::before {
+  opacity: 0;
+}
 button.cui-button.is-loading,
 a.cui-button.is-loading {
   color: transparent !important;
   position: relative;
-  background-color: rgba(var(--element-color), 0.04);
   cursor: default;
   border: 1px solid transparent;
 }
@@ -669,7 +674,7 @@ a.cui-button.is-size-7 {
   --element-font-size: var(--size-7);
 }
 
-/* Button styles */
+/* Button Icon styles */
 button.cui-button-icon,
 a.cui-button-icon {
   --element-color: var(--text-color);
@@ -683,23 +688,23 @@ a.cui-button-icon {
   user-select: none;
   font-size: var(--element-font-size);
   padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
-  border-radius: 3px;
+  border-radius: var(--radius-small);
   border: 1px solid transparent;
   font-family: var(--font-family);
   transition: background 0.2s linear;
-  -webkit-tap-highlight-color: transparent;
   background-color: rgba(var(--element-color), 0.04);
   color: rgb(var(--element-color));
+  -webkit-tap-highlight-color: transparent;
   position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
-  padding: 7px;
+  padding: calc(var(--element-font-size) * 0.37);
 }
 button.cui-button-icon::before,
 a.cui-button-icon::before {
   content: "";
-  display: block;
   position: absolute;
+  display: block;
   width: 100%;
   height: 100%;
   top: 0;
@@ -710,12 +715,12 @@ a.cui-button-icon::before {
   background-position: center;
   background-size: 1500%;
   opacity: 0;
-  transition: background 0.6s, opacity 1s;
+  transition: background 0.5s, opacity 1s;
   z-index: -1;
 }
 button.cui-button-icon.is-rounded,
 a.cui-button-icon.is-rounded {
-  border-radius: 99999px;
+  border-radius: var(--radius-rounded);
 }
 button.cui-button-icon.is-contained,
 a.cui-button-icon.is-contained {
@@ -745,16 +750,6 @@ button.cui-button-icon.is-contained:disabled::before,
 a.cui-button-icon.is-contained:disabled::before {
   opacity: 0;
 }
-button.cui-button-icon:disabled,
-a.cui-button-icon:disabled {
-  background-color: rgb(var(--text-color), 0.09) !important;
-  color: rgba(var(--text-color), 0.3);
-  cursor: default;
-}
-button.cui-button-icon:disabled::before,
-a.cui-button-icon:disabled::before {
-  opacity: 0;
-}
 button.cui-button-icon.is-outlined,
 a.cui-button-icon.is-outlined {
   border: 1px solid rgb(var(--element-color));
@@ -763,8 +758,14 @@ a.cui-button-icon.is-outlined {
 }
 button.cui-button-icon.is-outlined:disabled,
 a.cui-button-icon.is-outlined:disabled {
+  background-color: rgb(var(--text-color), 0) !important;
   border: 1px solid rgba(var(--text-color), 0.3);
   color: rgba(var(--text-color), 0.3);
+  cursor: default;
+}
+button.cui-button-icon.is-outlined:disabled::before,
+a.cui-button-icon.is-outlined:disabled::before {
+  opacity: 0;
 }
 button.cui-button-icon:hover,
 a.cui-button-icon:hover {
@@ -784,11 +785,20 @@ a.cui-button-icon:active::before {
   opacity: 0.35;
   transition-duration: 0s;
 }
+button.cui-button-icon:disabled,
+a.cui-button-icon:disabled {
+  background-color: rgb(var(--text-color), 0.09) !important;
+  color: rgba(var(--text-color), 0.3);
+  cursor: default;
+}
+button.cui-button-icon:disabled::before,
+a.cui-button-icon:disabled::before {
+  opacity: 0;
+}
 button.cui-button-icon.is-loading,
 a.cui-button-icon.is-loading {
   color: transparent !important;
   position: relative;
-  background-color: rgba(var(--element-color), 0.04);
   cursor: default;
   border: 1px solid transparent;
 }

@@ -1,0 +1,48 @@
+{
+  "name": "@cover-ui/storybook",
+  "version": "0.0.0",
+  "author": "Deft+",
+  "description": "Storybook UI for Cover UI",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deft-plus/cover-ui"
+  },
+  "scripts": {
+    "watch": "start-storybook -p 6006 --quiet --no-open",
+    "build-storybook": "build-storybook"
+  },
+  "bugs": {
+    "url": "https://github.com/deft-plus/cover-ui/issues"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "storybook",
+    "framework"
+  ],
+  "files": [
+    "src/**/*",
+    "src/cover-ui.scss",
+    "LICENSE",
+    "README.md"
+  ],
+  "dependencies": {
+    "@cover-ui/css": "*",
+    "@cover-ui/sass": "*",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-webpack5": "^6.5.9",
+    "@storybook/html": "^6.5.9",
+    "@storybook/manager-webpack5": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/lodash": "^4.14.182",
+    "babel-loader": "^8.2.5",
+    "sass-loader": "^13.0.0",
+    "tsconfig": "*"
+  }
+}

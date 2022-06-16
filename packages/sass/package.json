@@ -24,8 +24,7 @@
     "sass": "^1.49.9"
   },
   "files": [
-    "dist",
-    "scss",
+    "src/**/*",
     "src/cover-ui.scss",
     "LICENSE",
     "README.md"

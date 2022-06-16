@@ -78,8 +78,17 @@ export default function Docs() {
         <button className="cui-button is-scale-5">Scale 5</button>
         <button className="cui-button is-scale-6">Scale 6</button>
         <button className="cui-button is-scale-7">Scale 7</button>
+        <br />
+        <br />
+        <button className="cui-button is-primary" disabled>
+          Primary Disabled
+        </button>
+        <button className="cui-button is-secondary" disabled>
+          Secondary Disabled
+        </button>
 
         <h4>Sizes</h4>
+
         <button className="cui-button is-small">Small</button>
         <button className="cui-button">Default</button>
         <button className="cui-button is-medium">Medium</button>
