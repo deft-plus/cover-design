@@ -34,7 +34,8 @@
 
   $built-theme: (
     // Merges both the light and dark theme into one map.
-    theme: map.merge($light, $dark)
+    theme: map.merge($light, $dark),
+    'raw-theme': $theme-with-defaults
   );
 
   // Merge the variables with the theme to create a complete theme.

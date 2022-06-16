@@ -5,28 +5,39 @@
 /// List with all of the allowed keys to use in the variables.
 $variables-keys: 'palette', 'typography', 'spacing', 'breakpoints', 'z-index', 'miscellaneous';
 
-/// List with all of the allowed keys to use in the theme.
-$theme-keys: 'primary', 'secondary', 'info', 'success', 'warning', 'error', 'text', 'soft-text',
-  'hint-text', 'background', 'paper', 'divider';
+/// List with all of the allowed keys to use as colors.
+$colors: 'primary', 'secondary', 'info', 'success', 'warning', 'error';
 
-/// List with all of the allowed keys to use in the theme colors.
-$theme-color-keys: 'primary', 'secondary', 'info', 'success', 'warning', 'error';
+/// List with all of the allowed keys to use in the theme.
+$theme-keys: list.join(
+  $colors,
+  ('text', 'soft-text', 'hint-text', 'inverted-text', 'background', 'paper', 'divider')
+);
+
+/// List with all of the allowed keys to use in the complete theme returned by the define-theme function.
+$complete-theme-keys: 'palette', 'typography', 'spacing', 'breakpoints', 'z-index', 'miscellaneous',
+  'theme', 'raw-theme';
 
 /// List with all of the allowed keys to use in the variables.palette.
-$variables-palette-keys: 'white', 'scale-1', 'scale-2', 'scale-3', 'scale-4', 'scale-5', 'scale-6',
-  'scale-7', 'black', 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan',
-  'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown',
-  'grey', 'blue-grey';
+$variables-palette-keys: 'white', 'light', 'dark', 'black', 'scale-1', 'scale-2', 'scale-3',
+  'scale-4', 'scale-5', 'scale-6', 'scale-7', 'red', 'pink', 'purple', 'deep-purple', 'indigo',
+  'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange',
+  'deep-orange', 'brown', 'grey', 'blue-grey';
 
 /// List with all of the allowed colors from the theme and the palette.
-$color-keys: list.join($variables-palette-keys, $theme-color-keys);
+$color-keys: list.join($variables-palette-keys, $colors);
+
+/// List with all of the allowed keys to use as sizes.
+$sizes: 'size-1', 'size-2', 'size-3', 'size-4', 'size-5', 'size-6', 'size-7';
+
+/// List with all of the allowed keys to use as weights.
+$weights: 'weight-light', 'weight-normal', 'weight-bold';
 
 /// List with all of the allowed keys to use in the variables.typography.
-$variables-typography-keys: 'font-family', 'render-mode', 'size-1', 'size-2', 'size-3', 'size-4',
-  'size-5', 'size-6', 'size-7', 'weight-light', 'weight-normal', 'weight-bold';
+$variables-typography-keys: list.join(('font-family', 'render-mode'), list.join($sizes, $weights));
 
 /// List with all of the allowed sizes for the classes.
-$size-keys: 'small', 'regular', 'medium', 'large';
+$size-keys: 'small', 'medium', 'large';
 
 /// List with all of the allowed keys to use in the variables.spacing.
 $variables-spacing-keys: 'space-0', 'space-1', 'space-2', 'space-3', 'space-4', 'space-5', 'space-6';

@@ -1,35 +1,32 @@
+@use 'sass:list';
 @use '../core/functions' as f;
-@use '../core/theming/object-keys' as object-keys;
+@use '../core/theming/object-keys';
 
-@mixin base-button-styles($theme) {
-  --element-color: var(--text-color);
-  --element-font-size: 1rem;
+/// Mixin with all of the styles needed for the icons. Uses "boxicons"for the icons.
+@mixin icon-styles {
+  i {
+    font-family: 'boxicons' !important;
+    font-weight: 400;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    display: inline-block;
+    text-transform: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+  }
+}
 
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  outline: none;
-  white-space: nowrap;
-  user-select: none;
-  font-size: var(--element-font-size);
-  padding: calc(var(--element-font-size) * 0.4) calc(var(--element-font-size) * 1.5);
-  border-radius: 3px;
-  border: 1px solid transparent;
-  font-family: var(--font-family);
-  transition: background 0.2s linear;
-  -webkit-tap-highlight-color: transparent;
-  background-color: rgba(var(--element-color), 0.04);
-  color: rgb(var(--element-color));
-  // Ripple effect
+/// Mixin with all the styles needed for the ripple effect.
+@mixin ripple-styles($theme) {
   position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
 
   &::before {
     content: '';
-    display: block;
     position: absolute;
+    display: block;
     width: 100%;
     height: 100%;
     top: 0;
@@ -40,18 +37,58 @@
     background-position: center;
     background-size: 1500%;
     opacity: 0;
-    transition: background 0.6s, opacity 1s;
+    transition: background 0.5s, opacity 1s;
     z-index: -1;
   }
+}
 
-  &.is-rounded {
-    border-radius: 99999px;
+/// Loops over the colors from the theme to generate all the classes with colors.
+@mixin colors-styles($theme) {
+  @each $color in object-keys.$color-keys {
+    &.is-#{$color} {
+      --element-color: #{f.get-color($theme, $color)};
+
+      &.is-contained {
+        color: rgb(f.contrast-color($theme, 'light', $color, 'scale-1', 'scale-7'));
+      }
+    }
+  }
+}
+
+/// Loops over the sizes from the theme to generate all the classes with sizes.
+@mixin sizes-styles($theme) {
+  $sizes: (
+    small: 'size-7',
+    medium: 'size-5',
+    large: 'size-4',
+  );
+
+  @each $key, $size in $sizes {
+    &.is-#{$key} {
+      --element-font-size: var(--#{$size});
+    }
   }
 
+  @each $size in object-keys.$sizes {
+    &.is-#{$size} {
+      --element-font-size: var(--#{$size});
+    }
+  }
+}
+
+/// Mixing adds the classes for the rounded variant.
+@mixin rounded-variant-styles($theme) {
+  &.is-rounded {
+    border-radius: var(--radius-rounded);
+  }
+}
+
+/// Mixing adds the classes for the contained variant.
+@mixin contained-variant-styles($theme) {
   &.is-contained {
     border: 1px solid transparent;
     background-color: rgba(var(--element-color), 0.9);
-    color: rgb(var(--text-color));
+    color: rgb(var(--paper-color));
 
     &:hover {
       background-color: rgba(var(--element-color), 0.8);
@@ -65,7 +102,7 @@
     }
 
     &:disabled {
-      background-color: rgb(var(--text-color), 0.6) !important;
+      background-color: rgb(var(--text-color), 0.3) !important;
       color: rgba(var(--text-color), 0.6);
       cursor: default;
       &::before {
@@ -73,7 +110,54 @@
       }
     }
   }
+}
 
+/// Mixing adds the classes for the outlined variant.
+@mixin outlined-variant-styles($theme) {
+  &.is-outlined {
+    border: 1px solid rgb(var(--element-color));
+    background-color: rgba(var(--element-color), 0);
+    color: rgb(var(--element-color));
+
+    &:disabled {
+      background-color: rgb(var(--text-color), 0) !important;
+      border: 1px solid rgba(var(--text-color), 0.3);
+      color: rgba(var(--text-color), 0.3);
+      cursor: default;
+      &::before {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+/// Mixing adds the loading state.
+@mixin loading-state-styles($theme) {
+  &.is-loading {
+    color: transparent !important;
+    position: relative;
+    background-color: rgba(var(--element-color), 0.04);
+    cursor: default;
+    border: 1px solid transparent;
+
+    &::before {
+      left: calc(50% - (1em * 0.5));
+      top: calc(50% - (1em * 0.5));
+      height: 1em;
+      width: 1em;
+      animation: spin-around 0.8s infinite linear;
+      border: 2px solid rgb(var(--hint-text-color));
+      border-radius: 50%;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      background-image: none;
+      opacity: 1;
+    }
+  }
+}
+
+/// Mixing adds the all of the state.
+@mixin all-states-styles($theme) {
   &:hover {
     background-color: rgba(var(--element-color), 0.15);
   }
@@ -99,53 +183,37 @@
       opacity: 0;
     }
   }
+}
 
-  &.is-outlined {
-    border: 1px solid rgb(var(--element-color));
-    background-color: transparent;
-    color: rgb(var(--element-color));
+/// Base styles for the button.
+@mixin base-button-styles($theme) {
+  --element-color: var(--text-color);
+  --element-font-size: var(--size-6);
 
-    &:disabled {
-      background-color: transparent !important;
-      border: 1px solid rgba(var(--text-color), 0.3);
-      color: rgba(var(--text-color), 0.3);
-    }
-  }
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  user-select: none;
+  font-size: var(--element-font-size);
+  padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
+  border-radius: 3px;
+  border: 1px solid transparent;
+  font-family: var(--font-family);
+  transition: background 0.2s linear;
+  background-color: rgba(var(--element-color), 0.04);
+  color: rgb(var(--element-color));
+  -webkit-tap-highlight-color: transparent;
 
-  &.is-loading {
-    color: transparent !important;
-    position: relative;
-    background-color: rgba(var(--element-color), 0.04);
-    cursor: default;
-    border: 1px solid transparent;
-
-    &::before {
-      left: calc(50% - (1em * 0.5));
-      top: calc(50% - (1em * 0.5));
-      height: 1em;
-      width: 1em;
-      animation: spin-around 0.8s infinite linear;
-      border: 2px solid rgb(var(--hint-text-color));
-      border-radius: 50%;
-      border-right-color: transparent;
-      border-top-color: transparent;
-      background-image: none;
-      opacity: 1;
-    }
-  }
-
-  // Buttons icons.
-  i {
-    font-family: 'boxicons' !important;
-    font-weight: 400;
-    font-style: normal;
-    font-variant: normal;
-    line-height: 1;
-    display: inline-block;
-    text-transform: none;
-    speak: none;
-    -webkit-font-smoothing: antialiased;
-  }
+  @include ripple-styles($theme);
+  @include rounded-variant-styles($theme);
+  @include contained-variant-styles($theme);
+  @include outlined-variant-styles($theme);
+  @include all-states-styles($theme);
+  @include loading-state-styles($theme);
+  @include icon-styles;
 }
 
 /// Button styles.
@@ -163,28 +231,15 @@
   button.cui-button,
   a.cui-button {
     @include base-button-styles($theme);
-
-    // Adds the colors for the buttons.
-    @each $color in object-keys.$color-keys {
-      &.is-#{$color} {
-        --element-color: #{f.get-color($theme, $color)};
-        --element-color: #{f.get-color($theme, $color)};
-      }
-    }
-
-    // Adds the colors for the buttons.
-    @each $size in object-keys.$size-keys {
-      &.is-#{$size} {
-        --element-font-size: 2rem;
-      }
-    }
+    @include colors-styles($theme);
+    @include sizes-styles($theme);
   }
 
-  /* Button styles */
+  /* Button Icon styles */
   button.cui-button-icon,
   a.cui-button-icon {
     @include base-button-styles($theme);
-    padding: 7px;
+    padding: calc(var(--element-font-size) * 0.37);
   }
 
   @media (prefers-color-scheme: dark) {
