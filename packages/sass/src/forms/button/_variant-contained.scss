@@ -47,3 +47,15 @@
     }
   }
 }
+
+/// Overrides for the loading modifier.
+@mixin loading-overrides {
+  &.is-contained {
+    background-color: rgb(var(--element-color), 1);
+    &::before {
+      border: 2px solid rgb(var(--contrast-color, var(--text-color)));
+      border-right-color: transparent;
+      border-top-color: transparent;
+    }
+  }
+}
