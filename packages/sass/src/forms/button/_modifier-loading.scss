@@ -1,0 +1,66 @@
+@use '../../core/functions' as f;
+
+/// Mixing adds the disabled modifer.
+@mixin styles {
+  @keyframes spin-around {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+
+  &.is-loading {
+    background-color: rgba(var(--element-color), 0.04);
+    color: transparent !important;
+    position: relative;
+    cursor: default;
+
+    &::before {
+      left: calc(50% - (1em * 0.5));
+      top: calc(50% - (1em * 0.5));
+      height: 1em;
+      width: 1em;
+      animation: spin-around 0.8s infinite linear;
+      border-radius: 50%;
+      border: 2px solid rgb(var(--element-color));
+      border-right-color: transparent;
+      border-top-color: transparent;
+      background-image: none;
+      opacity: 1;
+    }
+
+    &.is-contained {
+      background-color: rgb(var(--element-color), 1);
+      &::before {
+        border: 2px solid rgb(var(--contrast-color, var(--text-color)));
+        border-right-color: transparent;
+        border-top-color: transparent;
+      }
+    }
+
+    &.is-outlined {
+      background-color: rgb(var(--element-color), 0);
+    }
+  }
+}
+
+/// Overrides for the disbaled modifier.
+@mixin disabled-overrides {
+  &.is-loading {
+    &::before {
+      border: 2px solid rgba(var(--text-color), 0.4);
+      border-right-color: transparent;
+      border-top-color: transparent;
+      opacity: 1;
+    }
+  }
+}
+
+/// Overrides for the dark mode.
+@mixin dark-overrides {
+  &.is-loading {
+    background-color: rgba(var(--element-color), 0.1);
+  }
+}

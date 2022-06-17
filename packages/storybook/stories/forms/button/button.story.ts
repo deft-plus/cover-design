@@ -5,8 +5,6 @@ export default {
   title: 'Forms/Button',
   argTypes: {
     disabled: { control: 'boolean' },
-    outlined: { control: 'boolean' },
-    contained: { control: 'boolean' },
     rounded: { control: 'boolean' },
     loading: { control: 'boolean' },
     icon: { control: 'boolean' },
@@ -30,6 +28,10 @@ export default {
   },
 } as Meta<CreateButtonConfig>;
 
-const Template: Story<CreateButtonConfig> = args => createButton(args);
+export const Default: Story<CreateButtonConfig> = args => createButton(args);
 
-export const Testing = Template.bind({});
+export const Outlined: Story<CreateButtonConfig> = args =>
+  createButton({ ...args, outlined: true });
+
+export const Contained: Story<CreateButtonConfig> = args =>
+  createButton({ ...args, contained: true });

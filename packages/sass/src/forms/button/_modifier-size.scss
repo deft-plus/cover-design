@@ -1,0 +1,22 @@
+@use '../../core/theming/object-keys';
+
+/// Loops over the sizes from the theme to generate all the classes with sizes.
+@mixin styles($theme) {
+  $sizes: (
+    small: 'size-7',
+    medium: 'size-5',
+    large: 'size-4',
+  );
+
+  @each $key, $size in $sizes {
+    &.is-#{$key} {
+      --element-font-size: var(--#{$size});
+    }
+  }
+
+  @each $size in object-keys.$sizes {
+    &.is-#{$size} {
+      --element-font-size: var(--#{$size});
+    }
+  }
+}

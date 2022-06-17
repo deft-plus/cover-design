@@ -32,10 +32,10 @@ const _createButton = ({ icon, color }: { icon?: boolean; color?: string }) => {
     const icon = document.createElement('i');
     icon.classList.add('bx', 'bx-search');
     button.appendChild(icon);
-    button.classList.add('m-1', 'cui-button-icon');
+    button.classList.add('m-1', 'button-icon');
   } else {
     button.innerText = startCase(color ?? 'Default');
-    button.classList.add('m-1', 'cui-button');
+    button.classList.add('m-1', 'button');
   }
 
   !!color && button.classList.add(`is-${color}`);

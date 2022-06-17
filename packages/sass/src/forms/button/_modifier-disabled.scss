@@ -1,0 +1,55 @@
+@use 'modifier-loading';
+@use 'variant-contained';
+@use 'variant-outlined';
+
+/// Mixing adds the disabled modifer.
+@mixin styles {
+  &:disabled {
+    background-color: rgb(var(--text-color), 0.04);
+    color: rgba(var(--text-color), 0.3);
+    cursor: default;
+    &::before {
+      opacity: 0;
+    }
+
+    // Overrides for the states.
+    &:hover {
+      background-color: rgb(var(--text-color), 0.04);
+    }
+
+    &:active {
+      background-color: rgb(var(--text-color), 0.04);
+      &::before {
+        opacity: 0;
+      }
+    }
+
+    @include variant-outlined.disabled-overrides;
+    @include variant-contained.disabled-overrides;
+    @include modifier-loading.disabled-overrides;
+  }
+}
+
+/// Overrides for the dark mode.
+@mixin dark-overrides {
+  &:disabled {
+    background-color: rgb(var(--text-color), 0.1);
+    color: rgba(var(--text-color), 0.3);
+
+    // Overrides for the states.
+    &:hover {
+      background-color: rgb(var(--text-color), 0.1);
+    }
+
+    &:active {
+      background-color: rgb(var(--text-color), 0.1);
+      &::before {
+        opacity: 0;
+      }
+    }
+
+    @include variant-outlined.disabled-overrides;
+    @include variant-contained.disabled-overrides;
+    @include modifier-loading.disabled-overrides;
+  }
+}

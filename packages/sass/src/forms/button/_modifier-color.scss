@@ -1,0 +1,15 @@
+@use '../../core/functions' as f;
+@use '../../core/theming/object-keys';
+
+@use 'variant-contained';
+
+/// Loops over the colors from the theme to generate all the classes with colors.
+@mixin styles($theme) {
+  @each $color in object-keys.$color-keys {
+    &.is-#{$color} {
+      --element-color: #{f.get-color($theme, $color)};
+
+      @include variant-contained.color-overrides($theme, $color);
+    }
+  }
+}

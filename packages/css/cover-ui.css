@@ -51,10 +51,17 @@ textarea {
 /* Minimum style to allow to style meter element. */
 meter {
   -webkit-appearance: revert;
-  appearance: revert;
+  -moz-appearance: revert;
+       appearance: revert;
 }
 
 /* Reset default text opacity of input placeholder. */
+::-moz-placeholder {
+  color: unset;
+}
+:-ms-input-placeholder {
+  color: unset;
+}
 ::placeholder {
   color: unset;
 }
@@ -151,7 +158,7 @@ meter {
   --text-color: var(--scale-5-color);
   --soft-text-color: var(--scale-4-color);
   --hint-text-color: var(--scale-3-color);
-  --inverted-text-color: var(--scale-3-color);
+  --inverted-text-color: var(--scale-2-color);
   --background-color: var(--white-color);
   --paper-color: var(--scale-2-color);
   --divider-color: var(--scale-1-color);
@@ -170,7 +177,7 @@ meter {
     --text-color: var(--scale-3-color);
     --soft-text-color: var(--scale-4-color);
     --hint-text-color: var(--scale-5-color);
-    --inverted-text-color: var(--scale-5-color);
+    --inverted-text-color: var(--scale-6-color);
     --background-color: var(--black-color);
     --paper-color: var(--scale-6-color);
     --divider-color: var(--scale-7-color);
@@ -184,6 +191,888 @@ body {
   font-family: var(--font-family);
 }
 
+/* Button styles */
+button.button,
+button.button-icon,
+a.button,
+a.button-icon {
+  --element-color: var(--text-color);
+  --element-font-size: var(--size-6);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-size: var(--element-font-size);
+  padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
+  border-radius: var(--radius-small);
+  border: 1px solid transparent;
+  font-family: var(--font-family);
+  transition: background 0.2s linear;
+  background-color: rgba(var(--element-color), 0.04);
+  color: rgb(var(--element-color));
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+button.button::before,
+button.button-icon::before,
+a.button::before,
+a.button-icon::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(var(--element-color)) 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1500%;
+  opacity: 0;
+  transition: background 0.5s, opacity 1s;
+  z-index: -1;
+}
+button.button i,
+button.button-icon i,
+a.button i,
+a.button-icon i {
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  display: inline-block;
+  text-transform: none;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+}
+button.button.is-outlined,
+button.button-icon.is-outlined,
+a.button.is-outlined,
+a.button-icon.is-outlined {
+  border: 1px solid rgb(var(--element-color));
+  background-color: rgba(var(--element-color), 0);
+  color: rgb(var(--element-color));
+}
+button.button.is-contained,
+button.button-icon.is-contained,
+a.button.is-contained,
+a.button-icon.is-contained {
+  --element-color: var(--paper-color);
+  border: 1px solid transparent;
+  background-color: rgba(var(--element-color), 1);
+  color: rgb(var(--text-color));
+}
+button.button.is-contained:hover,
+button.button-icon.is-contained:hover,
+a.button.is-contained:hover,
+a.button-icon.is-contained:hover {
+  background-color: rgba(var(--element-color), 0.85);
+}
+button.button.is-contained:active,
+button.button-icon.is-contained:active,
+a.button.is-contained:active,
+a.button-icon.is-contained:active {
+  background-color: rgba(var(--element-color), 0.75);
+}
+button.button.is-contained:active::before,
+button.button-icon.is-contained:active::before,
+a.button.is-contained:active::before,
+a.button-icon.is-contained:active::before {
+  opacity: 1;
+}
+button.button:hover,
+button.button-icon:hover,
+a.button:hover,
+a.button-icon:hover {
+  background-color: rgba(var(--element-color), 0.15);
+}
+button.button:focus-visible,
+button.button-icon:focus-visible,
+a.button:focus-visible,
+a.button-icon:focus-visible {
+  border: 1px solid rgb(var(--text-color));
+}
+button.button:active,
+button.button-icon:active,
+a.button:active,
+a.button-icon:active {
+  background-color: rgba(var(--element-color), 0.27);
+}
+button.button:active::before,
+button.button-icon:active::before,
+a.button:active::before,
+a.button-icon:active::before {
+  background-size: 0%;
+  opacity: 0.35;
+  transition-duration: 0s;
+}
+button.button.is-white,
+button.button-icon.is-white,
+a.button.is-white,
+a.button-icon.is-white {
+  --element-color: var(--white-color);
+}
+button.button.is-white.is-contained,
+button.button-icon.is-white.is-contained,
+a.button.is-white.is-contained,
+a.button-icon.is-white.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-white.is-contained::before,
+button.button-icon.is-white.is-contained::before,
+a.button.is-white.is-contained::before,
+a.button-icon.is-white.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-light,
+button.button-icon.is-light,
+a.button.is-light,
+a.button-icon.is-light {
+  --element-color: var(--light-color);
+}
+button.button.is-light.is-contained,
+button.button-icon.is-light.is-contained,
+a.button.is-light.is-contained,
+a.button-icon.is-light.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-light.is-contained::before,
+button.button-icon.is-light.is-contained::before,
+a.button.is-light.is-contained::before,
+a.button-icon.is-light.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-dark,
+button.button-icon.is-dark,
+a.button.is-dark,
+a.button-icon.is-dark {
+  --element-color: var(--dark-color);
+}
+button.button.is-dark.is-contained,
+button.button-icon.is-dark.is-contained,
+a.button.is-dark.is-contained,
+a.button-icon.is-dark.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-dark.is-contained::before,
+button.button-icon.is-dark.is-contained::before,
+a.button.is-dark.is-contained::before,
+a.button-icon.is-dark.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-black,
+button.button-icon.is-black,
+a.button.is-black,
+a.button-icon.is-black {
+  --element-color: var(--black-color);
+}
+button.button.is-black.is-contained,
+button.button-icon.is-black.is-contained,
+a.button.is-black.is-contained,
+a.button-icon.is-black.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-black.is-contained::before,
+button.button-icon.is-black.is-contained::before,
+a.button.is-black.is-contained::before,
+a.button-icon.is-black.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-scale-1,
+button.button-icon.is-scale-1,
+a.button.is-scale-1,
+a.button-icon.is-scale-1 {
+  --element-color: var(--scale-1-color);
+}
+button.button.is-scale-1.is-contained,
+button.button-icon.is-scale-1.is-contained,
+a.button.is-scale-1.is-contained,
+a.button-icon.is-scale-1.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-scale-1.is-contained::before,
+button.button-icon.is-scale-1.is-contained::before,
+a.button.is-scale-1.is-contained::before,
+a.button-icon.is-scale-1.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-scale-2,
+button.button-icon.is-scale-2,
+a.button.is-scale-2,
+a.button-icon.is-scale-2 {
+  --element-color: var(--scale-2-color);
+}
+button.button.is-scale-2.is-contained,
+button.button-icon.is-scale-2.is-contained,
+a.button.is-scale-2.is-contained,
+a.button-icon.is-scale-2.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-scale-2.is-contained::before,
+button.button-icon.is-scale-2.is-contained::before,
+a.button.is-scale-2.is-contained::before,
+a.button-icon.is-scale-2.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-scale-3,
+button.button-icon.is-scale-3,
+a.button.is-scale-3,
+a.button-icon.is-scale-3 {
+  --element-color: var(--scale-3-color);
+}
+button.button.is-scale-3.is-contained,
+button.button-icon.is-scale-3.is-contained,
+a.button.is-scale-3.is-contained,
+a.button-icon.is-scale-3.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-scale-3.is-contained::before,
+button.button-icon.is-scale-3.is-contained::before,
+a.button.is-scale-3.is-contained::before,
+a.button-icon.is-scale-3.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-scale-4,
+button.button-icon.is-scale-4,
+a.button.is-scale-4,
+a.button-icon.is-scale-4 {
+  --element-color: var(--scale-4-color);
+}
+button.button.is-scale-4.is-contained,
+button.button-icon.is-scale-4.is-contained,
+a.button.is-scale-4.is-contained,
+a.button-icon.is-scale-4.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-scale-4.is-contained::before,
+button.button-icon.is-scale-4.is-contained::before,
+a.button.is-scale-4.is-contained::before,
+a.button-icon.is-scale-4.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-scale-5,
+button.button-icon.is-scale-5,
+a.button.is-scale-5,
+a.button-icon.is-scale-5 {
+  --element-color: var(--scale-5-color);
+}
+button.button.is-scale-5.is-contained,
+button.button-icon.is-scale-5.is-contained,
+a.button.is-scale-5.is-contained,
+a.button-icon.is-scale-5.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-scale-5.is-contained::before,
+button.button-icon.is-scale-5.is-contained::before,
+a.button.is-scale-5.is-contained::before,
+a.button-icon.is-scale-5.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-scale-6,
+button.button-icon.is-scale-6,
+a.button.is-scale-6,
+a.button-icon.is-scale-6 {
+  --element-color: var(--scale-6-color);
+}
+button.button.is-scale-6.is-contained,
+button.button-icon.is-scale-6.is-contained,
+a.button.is-scale-6.is-contained,
+a.button-icon.is-scale-6.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-scale-6.is-contained::before,
+button.button-icon.is-scale-6.is-contained::before,
+a.button.is-scale-6.is-contained::before,
+a.button-icon.is-scale-6.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-scale-7,
+button.button-icon.is-scale-7,
+a.button.is-scale-7,
+a.button-icon.is-scale-7 {
+  --element-color: var(--scale-7-color);
+}
+button.button.is-scale-7.is-contained,
+button.button-icon.is-scale-7.is-contained,
+a.button.is-scale-7.is-contained,
+a.button-icon.is-scale-7.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-scale-7.is-contained::before,
+button.button-icon.is-scale-7.is-contained::before,
+a.button.is-scale-7.is-contained::before,
+a.button-icon.is-scale-7.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-red,
+button.button-icon.is-red,
+a.button.is-red,
+a.button-icon.is-red {
+  --element-color: var(--red-color);
+}
+button.button.is-red.is-contained,
+button.button-icon.is-red.is-contained,
+a.button.is-red.is-contained,
+a.button-icon.is-red.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-red.is-contained::before,
+button.button-icon.is-red.is-contained::before,
+a.button.is-red.is-contained::before,
+a.button-icon.is-red.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-pink,
+button.button-icon.is-pink,
+a.button.is-pink,
+a.button-icon.is-pink {
+  --element-color: var(--pink-color);
+}
+button.button.is-pink.is-contained,
+button.button-icon.is-pink.is-contained,
+a.button.is-pink.is-contained,
+a.button-icon.is-pink.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-pink.is-contained::before,
+button.button-icon.is-pink.is-contained::before,
+a.button.is-pink.is-contained::before,
+a.button-icon.is-pink.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-purple,
+button.button-icon.is-purple,
+a.button.is-purple,
+a.button-icon.is-purple {
+  --element-color: var(--purple-color);
+}
+button.button.is-purple.is-contained,
+button.button-icon.is-purple.is-contained,
+a.button.is-purple.is-contained,
+a.button-icon.is-purple.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-purple.is-contained::before,
+button.button-icon.is-purple.is-contained::before,
+a.button.is-purple.is-contained::before,
+a.button-icon.is-purple.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-deep-purple,
+button.button-icon.is-deep-purple,
+a.button.is-deep-purple,
+a.button-icon.is-deep-purple {
+  --element-color: var(--deep-purple-color);
+}
+button.button.is-deep-purple.is-contained,
+button.button-icon.is-deep-purple.is-contained,
+a.button.is-deep-purple.is-contained,
+a.button-icon.is-deep-purple.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-deep-purple.is-contained::before,
+button.button-icon.is-deep-purple.is-contained::before,
+a.button.is-deep-purple.is-contained::before,
+a.button-icon.is-deep-purple.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-indigo,
+button.button-icon.is-indigo,
+a.button.is-indigo,
+a.button-icon.is-indigo {
+  --element-color: var(--indigo-color);
+}
+button.button.is-indigo.is-contained,
+button.button-icon.is-indigo.is-contained,
+a.button.is-indigo.is-contained,
+a.button-icon.is-indigo.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-indigo.is-contained::before,
+button.button-icon.is-indigo.is-contained::before,
+a.button.is-indigo.is-contained::before,
+a.button-icon.is-indigo.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-blue,
+button.button-icon.is-blue,
+a.button.is-blue,
+a.button-icon.is-blue {
+  --element-color: var(--blue-color);
+}
+button.button.is-blue.is-contained,
+button.button-icon.is-blue.is-contained,
+a.button.is-blue.is-contained,
+a.button-icon.is-blue.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-blue.is-contained::before,
+button.button-icon.is-blue.is-contained::before,
+a.button.is-blue.is-contained::before,
+a.button-icon.is-blue.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-light-blue,
+button.button-icon.is-light-blue,
+a.button.is-light-blue,
+a.button-icon.is-light-blue {
+  --element-color: var(--light-blue-color);
+}
+button.button.is-light-blue.is-contained,
+button.button-icon.is-light-blue.is-contained,
+a.button.is-light-blue.is-contained,
+a.button-icon.is-light-blue.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-light-blue.is-contained::before,
+button.button-icon.is-light-blue.is-contained::before,
+a.button.is-light-blue.is-contained::before,
+a.button-icon.is-light-blue.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-cyan,
+button.button-icon.is-cyan,
+a.button.is-cyan,
+a.button-icon.is-cyan {
+  --element-color: var(--cyan-color);
+}
+button.button.is-cyan.is-contained,
+button.button-icon.is-cyan.is-contained,
+a.button.is-cyan.is-contained,
+a.button-icon.is-cyan.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-cyan.is-contained::before,
+button.button-icon.is-cyan.is-contained::before,
+a.button.is-cyan.is-contained::before,
+a.button-icon.is-cyan.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-teal,
+button.button-icon.is-teal,
+a.button.is-teal,
+a.button-icon.is-teal {
+  --element-color: var(--teal-color);
+}
+button.button.is-teal.is-contained,
+button.button-icon.is-teal.is-contained,
+a.button.is-teal.is-contained,
+a.button-icon.is-teal.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-teal.is-contained::before,
+button.button-icon.is-teal.is-contained::before,
+a.button.is-teal.is-contained::before,
+a.button-icon.is-teal.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-green,
+button.button-icon.is-green,
+a.button.is-green,
+a.button-icon.is-green {
+  --element-color: var(--green-color);
+}
+button.button.is-green.is-contained,
+button.button-icon.is-green.is-contained,
+a.button.is-green.is-contained,
+a.button-icon.is-green.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-green.is-contained::before,
+button.button-icon.is-green.is-contained::before,
+a.button.is-green.is-contained::before,
+a.button-icon.is-green.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-light-green,
+button.button-icon.is-light-green,
+a.button.is-light-green,
+a.button-icon.is-light-green {
+  --element-color: var(--light-green-color);
+}
+button.button.is-light-green.is-contained,
+button.button-icon.is-light-green.is-contained,
+a.button.is-light-green.is-contained,
+a.button-icon.is-light-green.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-light-green.is-contained::before,
+button.button-icon.is-light-green.is-contained::before,
+a.button.is-light-green.is-contained::before,
+a.button-icon.is-light-green.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-lime,
+button.button-icon.is-lime,
+a.button.is-lime,
+a.button-icon.is-lime {
+  --element-color: var(--lime-color);
+}
+button.button.is-lime.is-contained,
+button.button-icon.is-lime.is-contained,
+a.button.is-lime.is-contained,
+a.button-icon.is-lime.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-lime.is-contained::before,
+button.button-icon.is-lime.is-contained::before,
+a.button.is-lime.is-contained::before,
+a.button-icon.is-lime.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-yellow,
+button.button-icon.is-yellow,
+a.button.is-yellow,
+a.button-icon.is-yellow {
+  --element-color: var(--yellow-color);
+}
+button.button.is-yellow.is-contained,
+button.button-icon.is-yellow.is-contained,
+a.button.is-yellow.is-contained,
+a.button-icon.is-yellow.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-yellow.is-contained::before,
+button.button-icon.is-yellow.is-contained::before,
+a.button.is-yellow.is-contained::before,
+a.button-icon.is-yellow.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-amber,
+button.button-icon.is-amber,
+a.button.is-amber,
+a.button-icon.is-amber {
+  --element-color: var(--amber-color);
+}
+button.button.is-amber.is-contained,
+button.button-icon.is-amber.is-contained,
+a.button.is-amber.is-contained,
+a.button-icon.is-amber.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-amber.is-contained::before,
+button.button-icon.is-amber.is-contained::before,
+a.button.is-amber.is-contained::before,
+a.button-icon.is-amber.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-orange,
+button.button-icon.is-orange,
+a.button.is-orange,
+a.button-icon.is-orange {
+  --element-color: var(--orange-color);
+}
+button.button.is-orange.is-contained,
+button.button-icon.is-orange.is-contained,
+a.button.is-orange.is-contained,
+a.button-icon.is-orange.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-orange.is-contained::before,
+button.button-icon.is-orange.is-contained::before,
+a.button.is-orange.is-contained::before,
+a.button-icon.is-orange.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-deep-orange,
+button.button-icon.is-deep-orange,
+a.button.is-deep-orange,
+a.button-icon.is-deep-orange {
+  --element-color: var(--deep-orange-color);
+}
+button.button.is-deep-orange.is-contained,
+button.button-icon.is-deep-orange.is-contained,
+a.button.is-deep-orange.is-contained,
+a.button-icon.is-deep-orange.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-deep-orange.is-contained::before,
+button.button-icon.is-deep-orange.is-contained::before,
+a.button.is-deep-orange.is-contained::before,
+a.button-icon.is-deep-orange.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-brown,
+button.button-icon.is-brown,
+a.button.is-brown,
+a.button-icon.is-brown {
+  --element-color: var(--brown-color);
+}
+button.button.is-brown.is-contained,
+button.button-icon.is-brown.is-contained,
+a.button.is-brown.is-contained,
+a.button-icon.is-brown.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-brown.is-contained::before,
+button.button-icon.is-brown.is-contained::before,
+a.button.is-brown.is-contained::before,
+a.button-icon.is-brown.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-grey,
+button.button-icon.is-grey,
+a.button.is-grey,
+a.button-icon.is-grey {
+  --element-color: var(--grey-color);
+}
+button.button.is-grey.is-contained,
+button.button-icon.is-grey.is-contained,
+a.button.is-grey.is-contained,
+a.button-icon.is-grey.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-grey.is-contained::before,
+button.button-icon.is-grey.is-contained::before,
+a.button.is-grey.is-contained::before,
+a.button-icon.is-grey.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-blue-grey,
+button.button-icon.is-blue-grey,
+a.button.is-blue-grey,
+a.button-icon.is-blue-grey {
+  --element-color: var(--blue-grey-color);
+}
+button.button.is-blue-grey.is-contained,
+button.button-icon.is-blue-grey.is-contained,
+a.button.is-blue-grey.is-contained,
+a.button-icon.is-blue-grey.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-blue-grey.is-contained::before,
+button.button-icon.is-blue-grey.is-contained::before,
+a.button.is-blue-grey.is-contained::before,
+a.button-icon.is-blue-grey.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-primary,
+button.button-icon.is-primary,
+a.button.is-primary,
+a.button-icon.is-primary {
+  --element-color: var(--primary-color);
+}
+button.button.is-primary.is-contained,
+button.button-icon.is-primary.is-contained,
+a.button.is-primary.is-contained,
+a.button-icon.is-primary.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-primary.is-contained::before,
+button.button-icon.is-primary.is-contained::before,
+a.button.is-primary.is-contained::before,
+a.button-icon.is-primary.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-secondary,
+button.button-icon.is-secondary,
+a.button.is-secondary,
+a.button-icon.is-secondary {
+  --element-color: var(--secondary-color);
+}
+button.button.is-secondary.is-contained,
+button.button-icon.is-secondary.is-contained,
+a.button.is-secondary.is-contained,
+a.button-icon.is-secondary.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-secondary.is-contained::before,
+button.button-icon.is-secondary.is-contained::before,
+a.button.is-secondary.is-contained::before,
+a.button-icon.is-secondary.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-info,
+button.button-icon.is-info,
+a.button.is-info,
+a.button-icon.is-info {
+  --element-color: var(--info-color);
+}
+button.button.is-info.is-contained,
+button.button-icon.is-info.is-contained,
+a.button.is-info.is-contained,
+a.button-icon.is-info.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-info.is-contained::before,
+button.button-icon.is-info.is-contained::before,
+a.button.is-info.is-contained::before,
+a.button-icon.is-info.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-success,
+button.button-icon.is-success,
+a.button.is-success,
+a.button-icon.is-success {
+  --element-color: var(--success-color);
+}
+button.button.is-success.is-contained,
+button.button-icon.is-success.is-contained,
+a.button.is-success.is-contained,
+a.button-icon.is-success.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-success.is-contained::before,
+button.button-icon.is-success.is-contained::before,
+a.button.is-success.is-contained::before,
+a.button-icon.is-success.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-warning,
+button.button-icon.is-warning,
+a.button.is-warning,
+a.button-icon.is-warning {
+  --element-color: var(--warning-color);
+}
+button.button.is-warning.is-contained,
+button.button-icon.is-warning.is-contained,
+a.button.is-warning.is-contained,
+a.button-icon.is-warning.is-contained {
+  --contrast-color: var(--scale-7-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-warning.is-contained::before,
+button.button-icon.is-warning.is-contained::before,
+a.button.is-warning.is-contained::before,
+a.button-icon.is-warning.is-contained::before {
+  --contrast-color: var(--scale-7-color);
+}
+button.button.is-error,
+button.button-icon.is-error,
+a.button.is-error,
+a.button-icon.is-error {
+  --element-color: var(--error-color);
+}
+button.button.is-error.is-contained,
+button.button-icon.is-error.is-contained,
+a.button.is-error.is-contained,
+a.button-icon.is-error.is-contained {
+  --contrast-color: var(--scale-1-color);
+  color: rgb(var(--contrast-color));
+}
+button.button.is-error.is-contained::before,
+button.button-icon.is-error.is-contained::before,
+a.button.is-error.is-contained::before,
+a.button-icon.is-error.is-contained::before {
+  --contrast-color: var(--scale-1-color);
+}
+button.button.is-small,
+button.button-icon.is-small,
+a.button.is-small,
+a.button-icon.is-small {
+  --element-font-size: var(--size-7);
+}
+button.button.is-medium,
+button.button-icon.is-medium,
+a.button.is-medium,
+a.button-icon.is-medium {
+  --element-font-size: var(--size-5);
+}
+button.button.is-large,
+button.button-icon.is-large,
+a.button.is-large,
+a.button-icon.is-large {
+  --element-font-size: var(--size-4);
+}
+button.button.is-size-1,
+button.button-icon.is-size-1,
+a.button.is-size-1,
+a.button-icon.is-size-1 {
+  --element-font-size: var(--size-1);
+}
+button.button.is-size-2,
+button.button-icon.is-size-2,
+a.button.is-size-2,
+a.button-icon.is-size-2 {
+  --element-font-size: var(--size-2);
+}
+button.button.is-size-3,
+button.button-icon.is-size-3,
+a.button.is-size-3,
+a.button-icon.is-size-3 {
+  --element-font-size: var(--size-3);
+}
+button.button.is-size-4,
+button.button-icon.is-size-4,
+a.button.is-size-4,
+a.button-icon.is-size-4 {
+  --element-font-size: var(--size-4);
+}
+button.button.is-size-5,
+button.button-icon.is-size-5,
+a.button.is-size-5,
+a.button-icon.is-size-5 {
+  --element-font-size: var(--size-5);
+}
+button.button.is-size-6,
+button.button-icon.is-size-6,
+a.button.is-size-6,
+a.button-icon.is-size-6 {
+  --element-font-size: var(--size-6);
+}
+button.button.is-size-7,
+button.button-icon.is-size-7,
+a.button.is-size-7,
+a.button-icon.is-size-7 {
+  --element-font-size: var(--size-7);
+}
+button.button.is-rounded,
+button.button-icon.is-rounded,
+a.button.is-rounded,
+a.button-icon.is-rounded {
+  border-radius: var(--radius-rounded);
+}
+@-webkit-keyframes spin-around {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
 @keyframes spin-around {
   from {
     transform: rotate(0deg);
@@ -192,651 +1081,189 @@ body {
     transform: rotate(359deg);
   }
 }
-/* Button styles */
-button.cui-button,
-a.cui-button {
-  --element-color: var(--text-color);
-  --element-font-size: var(--size-6);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  outline: none;
-  white-space: nowrap;
-  user-select: none;
-  font-size: var(--element-font-size);
-  padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
-  border-radius: var(--radius-small);
-  border: 1px solid transparent;
-  font-family: var(--font-family);
-  transition: background 0.2s linear;
+button.button.is-loading,
+button.button-icon.is-loading,
+a.button.is-loading,
+a.button-icon.is-loading {
   background-color: rgba(var(--element-color), 0.04);
-  color: rgb(var(--element-color));
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-  overflow: hidden;
-  transform: translate3d(0, 0, 0);
-}
-button.cui-button::before,
-a.cui-button::before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgb(var(--element-color)) 10%, transparent 10.01%);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 1500%;
-  opacity: 0;
-  transition: background 0.5s, opacity 1s;
-  z-index: -1;
-}
-button.cui-button.is-rounded,
-a.cui-button.is-rounded {
-  border-radius: var(--radius-rounded);
-}
-button.cui-button.is-contained,
-a.cui-button.is-contained {
-  border: 1px solid transparent;
-  background-color: rgba(var(--element-color), 0.9);
-  color: rgb(var(--paper-color));
-}
-button.cui-button.is-contained:hover,
-a.cui-button.is-contained:hover {
-  background-color: rgba(var(--element-color), 0.8);
-}
-button.cui-button.is-contained:active,
-a.cui-button.is-contained:active {
-  background-color: rgba(var(--element-color), 0.7);
-}
-button.cui-button.is-contained:active::before,
-a.cui-button.is-contained:active::before {
-  opacity: 1;
-}
-button.cui-button.is-contained:disabled,
-a.cui-button.is-contained:disabled {
-  background-color: rgb(var(--text-color), 0.3) !important;
-  color: rgba(var(--text-color), 0.6);
-  cursor: default;
-}
-button.cui-button.is-contained:disabled::before,
-a.cui-button.is-contained:disabled::before {
-  opacity: 0;
-}
-button.cui-button.is-outlined,
-a.cui-button.is-outlined {
-  border: 1px solid rgb(var(--element-color));
-  background-color: rgba(var(--element-color), 0);
-  color: rgb(var(--element-color));
-}
-button.cui-button.is-outlined:disabled,
-a.cui-button.is-outlined:disabled {
-  background-color: rgb(var(--text-color), 0) !important;
-  border: 1px solid rgba(var(--text-color), 0.3);
-  color: rgba(var(--text-color), 0.3);
-  cursor: default;
-}
-button.cui-button.is-outlined:disabled::before,
-a.cui-button.is-outlined:disabled::before {
-  opacity: 0;
-}
-button.cui-button:hover,
-a.cui-button:hover {
-  background-color: rgba(var(--element-color), 0.15);
-}
-button.cui-button:focus-visible,
-a.cui-button:focus-visible {
-  border: 2px solid rgb(var(--text-color));
-}
-button.cui-button:active,
-a.cui-button:active {
-  background-color: rgba(var(--element-color), 0.27);
-}
-button.cui-button:active::before,
-a.cui-button:active::before {
-  background-size: 0%;
-  opacity: 0.35;
-  transition-duration: 0s;
-}
-button.cui-button:disabled,
-a.cui-button:disabled {
-  background-color: rgb(var(--text-color), 0.09) !important;
-  color: rgba(var(--text-color), 0.3);
-  cursor: default;
-}
-button.cui-button:disabled::before,
-a.cui-button:disabled::before {
-  opacity: 0;
-}
-button.cui-button.is-loading,
-a.cui-button.is-loading {
   color: transparent !important;
   position: relative;
   cursor: default;
-  border: 1px solid transparent;
 }
-button.cui-button.is-loading::before,
-a.cui-button.is-loading::before {
+button.button.is-loading::before,
+button.button-icon.is-loading::before,
+a.button.is-loading::before,
+a.button-icon.is-loading::before {
   left: calc(50% - 0.5em);
   top: calc(50% - 0.5em);
   height: 1em;
   width: 1em;
-  animation: spin-around 0.8s infinite linear;
-  border: 2px solid rgb(var(--hint-text-color));
+  -webkit-animation: spin-around 0.8s infinite linear;
+          animation: spin-around 0.8s infinite linear;
   border-radius: 50%;
+  border: 2px solid rgb(var(--element-color));
   border-right-color: transparent;
   border-top-color: transparent;
   background-image: none;
   opacity: 1;
 }
-button.cui-button i,
-a.cui-button i {
-  font-family: "boxicons" !important;
-  font-weight: 400;
-  font-style: normal;
-  font-variant: normal;
-  line-height: 1;
-  display: inline-block;
-  text-transform: none;
-  speak: none;
-  -webkit-font-smoothing: antialiased;
-}
-button.cui-button.is-white,
-a.cui-button.is-white {
-  --element-color: var(--white-color);
-}
-button.cui-button.is-white.is-contained,
-a.cui-button.is-white.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-light,
-a.cui-button.is-light {
-  --element-color: var(--light-color);
-}
-button.cui-button.is-light.is-contained,
-a.cui-button.is-light.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-dark,
-a.cui-button.is-dark {
-  --element-color: var(--dark-color);
-}
-button.cui-button.is-dark.is-contained,
-a.cui-button.is-dark.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-black,
-a.cui-button.is-black {
-  --element-color: var(--black-color);
-}
-button.cui-button.is-black.is-contained,
-a.cui-button.is-black.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-scale-1,
-a.cui-button.is-scale-1 {
-  --element-color: var(--scale-1-color);
-}
-button.cui-button.is-scale-1.is-contained,
-a.cui-button.is-scale-1.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-scale-2,
-a.cui-button.is-scale-2 {
-  --element-color: var(--scale-2-color);
-}
-button.cui-button.is-scale-2.is-contained,
-a.cui-button.is-scale-2.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-scale-3,
-a.cui-button.is-scale-3 {
-  --element-color: var(--scale-3-color);
-}
-button.cui-button.is-scale-3.is-contained,
-a.cui-button.is-scale-3.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-scale-4,
-a.cui-button.is-scale-4 {
-  --element-color: var(--scale-4-color);
-}
-button.cui-button.is-scale-4.is-contained,
-a.cui-button.is-scale-4.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-scale-5,
-a.cui-button.is-scale-5 {
-  --element-color: var(--scale-5-color);
-}
-button.cui-button.is-scale-5.is-contained,
-a.cui-button.is-scale-5.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-scale-6,
-a.cui-button.is-scale-6 {
-  --element-color: var(--scale-6-color);
-}
-button.cui-button.is-scale-6.is-contained,
-a.cui-button.is-scale-6.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-scale-7,
-a.cui-button.is-scale-7 {
-  --element-color: var(--scale-7-color);
-}
-button.cui-button.is-scale-7.is-contained,
-a.cui-button.is-scale-7.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-red,
-a.cui-button.is-red {
-  --element-color: var(--red-color);
-}
-button.cui-button.is-red.is-contained,
-a.cui-button.is-red.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-pink,
-a.cui-button.is-pink {
-  --element-color: var(--pink-color);
-}
-button.cui-button.is-pink.is-contained,
-a.cui-button.is-pink.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-purple,
-a.cui-button.is-purple {
-  --element-color: var(--purple-color);
-}
-button.cui-button.is-purple.is-contained,
-a.cui-button.is-purple.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-deep-purple,
-a.cui-button.is-deep-purple {
-  --element-color: var(--deep-purple-color);
-}
-button.cui-button.is-deep-purple.is-contained,
-a.cui-button.is-deep-purple.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-indigo,
-a.cui-button.is-indigo {
-  --element-color: var(--indigo-color);
-}
-button.cui-button.is-indigo.is-contained,
-a.cui-button.is-indigo.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-blue,
-a.cui-button.is-blue {
-  --element-color: var(--blue-color);
-}
-button.cui-button.is-blue.is-contained,
-a.cui-button.is-blue.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-light-blue,
-a.cui-button.is-light-blue {
-  --element-color: var(--light-blue-color);
-}
-button.cui-button.is-light-blue.is-contained,
-a.cui-button.is-light-blue.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-cyan,
-a.cui-button.is-cyan {
-  --element-color: var(--cyan-color);
-}
-button.cui-button.is-cyan.is-contained,
-a.cui-button.is-cyan.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-teal,
-a.cui-button.is-teal {
-  --element-color: var(--teal-color);
-}
-button.cui-button.is-teal.is-contained,
-a.cui-button.is-teal.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-green,
-a.cui-button.is-green {
-  --element-color: var(--green-color);
-}
-button.cui-button.is-green.is-contained,
-a.cui-button.is-green.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-light-green,
-a.cui-button.is-light-green {
-  --element-color: var(--light-green-color);
-}
-button.cui-button.is-light-green.is-contained,
-a.cui-button.is-light-green.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-lime,
-a.cui-button.is-lime {
-  --element-color: var(--lime-color);
-}
-button.cui-button.is-lime.is-contained,
-a.cui-button.is-lime.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-yellow,
-a.cui-button.is-yellow {
-  --element-color: var(--yellow-color);
-}
-button.cui-button.is-yellow.is-contained,
-a.cui-button.is-yellow.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-amber,
-a.cui-button.is-amber {
-  --element-color: var(--amber-color);
-}
-button.cui-button.is-amber.is-contained,
-a.cui-button.is-amber.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-orange,
-a.cui-button.is-orange {
-  --element-color: var(--orange-color);
-}
-button.cui-button.is-orange.is-contained,
-a.cui-button.is-orange.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-deep-orange,
-a.cui-button.is-deep-orange {
-  --element-color: var(--deep-orange-color);
-}
-button.cui-button.is-deep-orange.is-contained,
-a.cui-button.is-deep-orange.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-brown,
-a.cui-button.is-brown {
-  --element-color: var(--brown-color);
-}
-button.cui-button.is-brown.is-contained,
-a.cui-button.is-brown.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-grey,
-a.cui-button.is-grey {
-  --element-color: var(--grey-color);
-}
-button.cui-button.is-grey.is-contained,
-a.cui-button.is-grey.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-blue-grey,
-a.cui-button.is-blue-grey {
-  --element-color: var(--blue-grey-color);
-}
-button.cui-button.is-blue-grey.is-contained,
-a.cui-button.is-blue-grey.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-primary,
-a.cui-button.is-primary {
-  --element-color: var(--primary-color);
-}
-button.cui-button.is-primary.is-contained,
-a.cui-button.is-primary.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-secondary,
-a.cui-button.is-secondary {
-  --element-color: var(--secondary-color);
-}
-button.cui-button.is-secondary.is-contained,
-a.cui-button.is-secondary.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-info,
-a.cui-button.is-info {
-  --element-color: var(--info-color);
-}
-button.cui-button.is-info.is-contained,
-a.cui-button.is-info.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-success,
-a.cui-button.is-success {
-  --element-color: var(--success-color);
-}
-button.cui-button.is-success.is-contained,
-a.cui-button.is-success.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-warning,
-a.cui-button.is-warning {
-  --element-color: var(--warning-color);
-}
-button.cui-button.is-warning.is-contained,
-a.cui-button.is-warning.is-contained {
-  color: rgb(var(--scale-7-color));
-}
-button.cui-button.is-error,
-a.cui-button.is-error {
-  --element-color: var(--error-color);
-}
-button.cui-button.is-error.is-contained,
-a.cui-button.is-error.is-contained {
-  color: rgb(var(--scale-1-color));
-}
-button.cui-button.is-small,
-a.cui-button.is-small {
-  --element-font-size: var(--size-7);
-}
-button.cui-button.is-medium,
-a.cui-button.is-medium {
-  --element-font-size: var(--size-5);
-}
-button.cui-button.is-large,
-a.cui-button.is-large {
-  --element-font-size: var(--size-4);
-}
-button.cui-button.is-size-1,
-a.cui-button.is-size-1 {
-  --element-font-size: var(--size-1);
-}
-button.cui-button.is-size-2,
-a.cui-button.is-size-2 {
-  --element-font-size: var(--size-2);
-}
-button.cui-button.is-size-3,
-a.cui-button.is-size-3 {
-  --element-font-size: var(--size-3);
-}
-button.cui-button.is-size-4,
-a.cui-button.is-size-4 {
-  --element-font-size: var(--size-4);
-}
-button.cui-button.is-size-5,
-a.cui-button.is-size-5 {
-  --element-font-size: var(--size-5);
-}
-button.cui-button.is-size-6,
-a.cui-button.is-size-6 {
-  --element-font-size: var(--size-6);
-}
-button.cui-button.is-size-7,
-a.cui-button.is-size-7 {
-  --element-font-size: var(--size-7);
+button.button.is-loading.is-contained,
+button.button-icon.is-loading.is-contained,
+a.button.is-loading.is-contained,
+a.button-icon.is-loading.is-contained {
+  background-color: rgb(var(--element-color), 1);
+}
+button.button.is-loading.is-contained::before,
+button.button-icon.is-loading.is-contained::before,
+a.button.is-loading.is-contained::before,
+a.button-icon.is-loading.is-contained::before {
+  border: 2px solid rgb(var(--contrast-color, var(--text-color)));
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
+button.button.is-loading.is-outlined,
+button.button-icon.is-loading.is-outlined,
+a.button.is-loading.is-outlined,
+a.button-icon.is-loading.is-outlined {
+  background-color: rgb(var(--element-color), 0);
+}
+button.button:disabled,
+button.button-icon:disabled,
+a.button:disabled,
+a.button-icon:disabled {
+  background-color: rgb(var(--text-color), 0.04);
+  color: rgba(var(--text-color), 0.3);
+  cursor: default;
+}
+button.button:disabled::before,
+button.button-icon:disabled::before,
+a.button:disabled::before,
+a.button-icon:disabled::before {
+  opacity: 0;
+}
+button.button:disabled:hover,
+button.button-icon:disabled:hover,
+a.button:disabled:hover,
+a.button-icon:disabled:hover {
+  background-color: rgb(var(--text-color), 0.04);
+}
+button.button:disabled:active,
+button.button-icon:disabled:active,
+a.button:disabled:active,
+a.button-icon:disabled:active {
+  background-color: rgb(var(--text-color), 0.04);
+}
+button.button:disabled:active::before,
+button.button-icon:disabled:active::before,
+a.button:disabled:active::before,
+a.button-icon:disabled:active::before {
+  opacity: 0;
+}
+button.button:disabled.is-outlined,
+button.button-icon:disabled.is-outlined,
+a.button:disabled.is-outlined,
+a.button-icon:disabled.is-outlined {
+  border: 1px solid rgba(var(--text-color), 0.3);
+  background-color: rgba(var(--text-color), 0);
+  color: rgba(var(--text-color), 0.6);
+}
+button.button:disabled.is-contained,
+button.button-icon:disabled.is-contained,
+a.button:disabled.is-contained,
+a.button-icon:disabled.is-contained {
+  background-color: rgb(var(--text-color), 0.3);
+  color: rgba(var(--text-color), 0.6);
+}
+button.button:disabled.is-contained::before,
+button.button-icon:disabled.is-contained::before,
+a.button:disabled.is-contained::before,
+a.button-icon:disabled.is-contained::before {
+  opacity: 0;
+}
+button.button:disabled.is-loading::before,
+button.button-icon:disabled.is-loading::before,
+a.button:disabled.is-loading::before,
+a.button-icon:disabled.is-loading::before {
+  border: 2px solid rgba(var(--text-color), 0.4);
+  border-right-color: transparent;
+  border-top-color: transparent;
+  opacity: 1;
 }
 
 /* Button Icon styles */
-button.cui-button-icon,
-a.cui-button-icon {
-  --element-color: var(--text-color);
-  --element-font-size: var(--size-6);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  outline: none;
-  white-space: nowrap;
-  user-select: none;
-  font-size: var(--element-font-size);
-  padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
-  border-radius: var(--radius-small);
-  border: 1px solid transparent;
-  font-family: var(--font-family);
-  transition: background 0.2s linear;
-  background-color: rgba(var(--element-color), 0.04);
-  color: rgb(var(--element-color));
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-  overflow: hidden;
-  transform: translate3d(0, 0, 0);
+button.button-icon,
+a.button-icon {
   padding: calc(var(--element-font-size) * 0.37);
 }
-button.cui-button-icon::before,
-a.cui-button-icon::before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgb(var(--element-color)) 10%, transparent 10.01%);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 1500%;
-  opacity: 0;
-  transition: background 0.5s, opacity 1s;
-  z-index: -1;
-}
-button.cui-button-icon.is-rounded,
-a.cui-button-icon.is-rounded {
-  border-radius: var(--radius-rounded);
-}
-button.cui-button-icon.is-contained,
-a.cui-button-icon.is-contained {
-  border: 1px solid transparent;
-  background-color: rgba(var(--element-color), 0.9);
-  color: rgb(var(--paper-color));
-}
-button.cui-button-icon.is-contained:hover,
-a.cui-button-icon.is-contained:hover {
-  background-color: rgba(var(--element-color), 0.8);
-}
-button.cui-button-icon.is-contained:active,
-a.cui-button-icon.is-contained:active {
-  background-color: rgba(var(--element-color), 0.7);
-}
-button.cui-button-icon.is-contained:active::before,
-a.cui-button-icon.is-contained:active::before {
-  opacity: 1;
-}
-button.cui-button-icon.is-contained:disabled,
-a.cui-button-icon.is-contained:disabled {
-  background-color: rgb(var(--text-color), 0.3) !important;
-  color: rgba(var(--text-color), 0.6);
-  cursor: default;
-}
-button.cui-button-icon.is-contained:disabled::before,
-a.cui-button-icon.is-contained:disabled::before {
-  opacity: 0;
-}
-button.cui-button-icon.is-outlined,
-a.cui-button-icon.is-outlined {
-  border: 1px solid rgb(var(--element-color));
-  background-color: rgba(var(--element-color), 0);
-  color: rgb(var(--element-color));
-}
-button.cui-button-icon.is-outlined:disabled,
-a.cui-button-icon.is-outlined:disabled {
-  background-color: rgb(var(--text-color), 0) !important;
-  border: 1px solid rgba(var(--text-color), 0.3);
-  color: rgba(var(--text-color), 0.3);
-  cursor: default;
-}
-button.cui-button-icon.is-outlined:disabled::before,
-a.cui-button-icon.is-outlined:disabled::before {
-  opacity: 0;
-}
-button.cui-button-icon:hover,
-a.cui-button-icon:hover {
-  background-color: rgba(var(--element-color), 0.15);
-}
-button.cui-button-icon:focus-visible,
-a.cui-button-icon:focus-visible {
-  border: 2px solid rgb(var(--text-color));
-}
-button.cui-button-icon:active,
-a.cui-button-icon:active {
-  background-color: rgba(var(--element-color), 0.27);
-}
-button.cui-button-icon:active::before,
-a.cui-button-icon:active::before {
-  background-size: 0%;
-  opacity: 0.35;
-  transition-duration: 0s;
-}
-button.cui-button-icon:disabled,
-a.cui-button-icon:disabled {
-  background-color: rgb(var(--text-color), 0.09) !important;
-  color: rgba(var(--text-color), 0.3);
-  cursor: default;
-}
-button.cui-button-icon:disabled::before,
-a.cui-button-icon:disabled::before {
-  opacity: 0;
-}
-button.cui-button-icon.is-loading,
-a.cui-button-icon.is-loading {
-  color: transparent !important;
-  position: relative;
-  cursor: default;
-  border: 1px solid transparent;
-}
-button.cui-button-icon.is-loading::before,
-a.cui-button-icon.is-loading::before {
-  left: calc(50% - 0.5em);
-  top: calc(50% - 0.5em);
-  height: 1em;
-  width: 1em;
-  animation: spin-around 0.8s infinite linear;
-  border: 2px solid rgb(var(--hint-text-color));
-  border-radius: 50%;
-  border-right-color: transparent;
-  border-top-color: transparent;
-  background-image: none;
-  opacity: 1;
-}
-button.cui-button-icon i,
-a.cui-button-icon i {
-  font-family: "boxicons" !important;
-  font-weight: 400;
-  font-style: normal;
-  font-variant: normal;
-  line-height: 1;
-  display: inline-block;
-  text-transform: none;
-  speak: none;
-  -webkit-font-smoothing: antialiased;
-}
 
+/* Dark mode button styles. */
 @media (prefers-color-scheme: dark) {
-  button.cui-button,
-a.cui-button {
+  button.button,
+button.button-icon,
+a.button,
+a.button-icon {
     background-color: rgba(var(--element-color), 0.1);
   }
-  button.cui-button.is-loading,
-a.cui-button.is-loading {
+  button.button.is-loading,
+button.button-icon.is-loading,
+a.button.is-loading,
+a.button-icon.is-loading {
     background-color: rgba(var(--element-color), 0.1);
+  }
+  button.button:disabled,
+button.button-icon:disabled,
+a.button:disabled,
+a.button-icon:disabled {
+    background-color: rgb(var(--text-color), 0.1);
+    color: rgba(var(--text-color), 0.3);
+  }
+  button.button:disabled:hover,
+button.button-icon:disabled:hover,
+a.button:disabled:hover,
+a.button-icon:disabled:hover {
+    background-color: rgb(var(--text-color), 0.1);
+  }
+  button.button:disabled:active,
+button.button-icon:disabled:active,
+a.button:disabled:active,
+a.button-icon:disabled:active {
+    background-color: rgb(var(--text-color), 0.1);
+  }
+  button.button:disabled:active::before,
+button.button-icon:disabled:active::before,
+a.button:disabled:active::before,
+a.button-icon:disabled:active::before {
+    opacity: 0;
+  }
+  button.button:disabled.is-outlined,
+button.button-icon:disabled.is-outlined,
+a.button:disabled.is-outlined,
+a.button-icon:disabled.is-outlined {
+    border: 1px solid rgba(var(--text-color), 0.3);
+    background-color: rgba(var(--text-color), 0);
+    color: rgba(var(--text-color), 0.6);
+  }
+  button.button:disabled.is-contained,
+button.button-icon:disabled.is-contained,
+a.button:disabled.is-contained,
+a.button-icon:disabled.is-contained {
+    background-color: rgb(var(--text-color), 0.3);
+    color: rgba(var(--text-color), 0.6);
+  }
+  button.button:disabled.is-contained::before,
+button.button-icon:disabled.is-contained::before,
+a.button:disabled.is-contained::before,
+a.button-icon:disabled.is-contained::before {
+    opacity: 0;
+  }
+  button.button:disabled.is-loading::before,
+button.button-icon:disabled.is-loading::before,
+a.button:disabled.is-loading::before,
+a.button-icon:disabled.is-loading::before {
+    border: 2px solid rgba(var(--text-color), 0.4);
+    border-right-color: transparent;
+    border-top-color: transparent;
+    opacity: 1;
   }
 }
 .m-0 {

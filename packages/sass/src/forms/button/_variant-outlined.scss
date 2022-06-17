@@ -1,0 +1,17 @@
+/// Mixing adds the classes for the outlined variant.
+@mixin styles($theme) {
+  &.is-outlined {
+    border: 1px solid rgb(var(--element-color));
+    background-color: rgba(var(--element-color), 0);
+    color: rgb(var(--element-color));
+  }
+}
+
+/// Overrides for the disbaled modifier.
+@mixin disabled-overrides {
+  &.is-outlined {
+    border: 1px solid rgba(var(--text-color), 0.3);
+    background-color: rgba(var(--text-color), 0);
+    color: rgba(var(--text-color), 0.6);
+  }
+}

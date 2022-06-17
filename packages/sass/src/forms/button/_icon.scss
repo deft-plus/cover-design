@@ -1,0 +1,13 @@
+/// Mixin with all of the styles needed for the button with icons. Uses "boxicons"for the icons.
+@mixin styles {
+  i {
+    font-weight: 400;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    display: inline-block;
+    text-transform: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+  }
+}

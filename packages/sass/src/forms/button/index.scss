@@ -1,0 +1,53 @@
+@use 'base';
+@use 'icon';
+@use 'states';
+
+@use 'modifier-color';
+@use 'modifier-disabled';
+@use 'modifier-loading';
+@use 'modifier-rounded';
+@use 'modifier-size';
+
+@use 'variant-contained';
+@use 'variant-outlined';
+
+/// Button styles.
+@mixin with-theme($theme) {
+  /* Button styles */
+  button.button,
+  button.button-icon,
+  a.button,
+  a.button-icon {
+    @include base.styles($theme);
+    @include icon.styles;
+
+    @include variant-outlined.styles($theme);
+    @include variant-contained.styles($theme);
+
+    @include states.styles;
+
+    @include modifier-color.styles($theme);
+    @include modifier-size.styles($theme);
+    @include modifier-rounded.styles($theme);
+    @include modifier-loading.styles;
+    @include modifier-disabled.styles;
+  }
+
+  /* Button Icon styles */
+  button.button-icon,
+  a.button-icon {
+    padding: calc(var(--element-font-size) * 0.37);
+  }
+
+  /* Dark mode button styles. */
+  @media (prefers-color-scheme: dark) {
+    button.button,
+    button.button-icon,
+    a.button,
+    a.button-icon {
+      @include base.dark-overrides;
+      @include modifier-loading.dark-overrides;
+      @include modifier-disabled.dark-overrides;
+    }
+  }
+}

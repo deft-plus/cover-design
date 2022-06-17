@@ -1,0 +1,6 @@
+/// Mixing adds the classes for the rounded modifier.
+@mixin styles($theme) {
+  &.is-rounded {
+    border-radius: var(--radius-rounded);
+  }
+}
