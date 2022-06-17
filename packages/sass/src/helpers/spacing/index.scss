@@ -1,0 +1,83 @@
+@use 'sass:list';
+@use 'sass:string';
+@use '../../core/theming/object-keys';
+
+/// Function will return the value of the spacing.
+/// If is auto it will return the value otherwise will return a CSS variable.
+@function -get-value($spacing) {
+  @if $spacing == 'auto' {
+    @return auto;
+  } @else {
+    @return var(--#{$spacing});
+  }
+}
+
+/// Function will return the class name of the spacing.
+/// If is auto it will return the value otherwise will return the number of the spacing.
+@function -get-name($spacing) {
+  @if $spacing == 'auto' {
+    @return auto;
+  } @else {
+    @return string.slice($spacing, string.index($spacing, '-') + 1);
+  }
+}
+
+/// Mixing adds all the helper classes for the spacing.
+/// Use the spacing variables to create shorthand margin and padding utility classes.
+@mixin with-theme($theme) {
+  $spacing: list.append(object-keys.$variables-spacing-keys, 'auto');
+
+  @each $space in $spacing {
+    .m {
+      &-#{-get-name($space)} {
+        margin: -get-value($space) !important;
+      }
+      &t-#{-get-name($space)} {
+        margin-top: -get-value($space) !important;
+      }
+      &r-#{-get-name($space)} {
+        margin-right: -get-value($space) !important;
+      }
+      &b-#{-get-name($space)} {
+        margin-bottom: -get-value($space) !important;
+      }
+      &l-#{-get-name($space)} {
+        margin-left: -get-value($space) !important;
+      }
+      &x-#{-get-name($space)} {
+        margin-right: -get-value($space) !important;
+        margin-left: -get-value($space) !important;
+      }
+      &y-#{-get-name($space)} {
+        margin-top: -get-value($space) !important;
+        margin-bottom: -get-value($space) !important;
+      }
+    }
+
+    .p {
+      &-#{-get-name($space)} {
+        padding: -get-value($space) !important;
+      }
+      &t-#{-get-name($space)} {
+        padding-top: -get-value($space) !important;
+      }
+      &r-#{-get-name($space)} {
+        padding-right: -get-value($space) !important;
+      }
+      &b-#{-get-name($space)} {
+        padding-bottom: -get-value($space) !important;
+      }
+      &l-#{-get-name($space)} {
+        padding-left: -get-value($space) !important;
+      }
+      &x-#{-get-name($space)} {
+        padding-right: -get-value($space) !important;
+        padding-left: -get-value($space) !important;
+      }
+      &y-#{-get-name($space)} {
+        padding-top: -get-value($space) !important;
+        padding-bottom: -get-value($space) !important;
+      }
+    }
+  }
+}

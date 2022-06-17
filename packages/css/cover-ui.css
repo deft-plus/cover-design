@@ -51,17 +51,10 @@ textarea {
 /* Minimum style to allow to style meter element. */
 meter {
   -webkit-appearance: revert;
-  -moz-appearance: revert;
-       appearance: revert;
+  appearance: revert;
 }
 
 /* Reset default text opacity of input placeholder. */
-::-moz-placeholder {
-  color: unset;
-}
-:-ms-input-placeholder {
-  color: unset;
-}
 ::placeholder {
   color: unset;
 }
@@ -204,10 +197,7 @@ a.button-icon {
   cursor: pointer;
   outline: none;
   white-space: nowrap;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   font-size: var(--element-font-size);
   padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
   border-radius: var(--radius-small);
@@ -1065,14 +1055,6 @@ a.button.is-rounded,
 a.button-icon.is-rounded {
   border-radius: var(--radius-rounded);
 }
-@-webkit-keyframes spin-around {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
 @keyframes spin-around {
   from {
     transform: rotate(0deg);
@@ -1098,8 +1080,7 @@ a.button-icon.is-loading::before {
   top: calc(50% - 0.5em);
   height: 1em;
   width: 1em;
-  -webkit-animation: spin-around 0.8s infinite linear;
-          animation: spin-around 0.8s infinite linear;
+  animation: spin-around 0.8s infinite linear;
   border-radius: 50%;
   border: 2px solid rgb(var(--element-color));
   border-right-color: transparent;

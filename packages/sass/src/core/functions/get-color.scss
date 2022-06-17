@@ -1,0 +1,14 @@
+@use 'sass:list';
+@use '../theming/object-keys';
+
+/// Extracts a color from a theme or throws an error if it doesn't exist in the
+/// object-keys.$color-keys array.
+/// @param {Map} $theme The theme from which to extract a color.
+/// @param {String} $color-name The name of the variable to get (Can be from the palette or the theme).
+@function get-color($theme, $color-name) {
+  @if list.index(object-keys.$color-keys, $color-name) {
+    @return 'var(--#{$color-name}-color)';
+  }
+
+  @error 'Color "' + $color-name + '" does not exist in theme. Available colors are: ' + object-keys.$color-keys;
+}

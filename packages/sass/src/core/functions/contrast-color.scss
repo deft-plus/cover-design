@@ -1,0 +1,35 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use '../theming/object-keys';
+
+@function contrast-color($theme, $mode, $color-name, $light, $dark) {
+  $palette: map.get($theme, 'palette');
+  $theme: map.get($theme, 'raw-theme');
+  $w: null;
+
+  // Is a theme color.
+  @if list.index(object-keys.$colors, $color-name) != null {
+    $colors-with-mode: map.get($theme, $mode);
+    $color-value: map.get($colors-with-mode, $color-name);
+    $w: map.get($palette, $color-value);
+  }
+  // Is in palette.
+  @else {
+    $w: map.get($palette, $color-name);
+  }
+
+  $n: map.get($palette, $light);
+
+  $r: (math.max(red($n), red($w))) - (math.min(red($n), red($w)));
+  $g: (math.max(green($n), green($w))) - (math.min(green($n), green($w)));
+  $b: (math.max(blue($n), blue($w))) - (math.min(blue($n), blue($w)));
+  $sum-rgb: $r + $g + $b;
+
+  @if $sum-rgb < 370 {
+    @return string.unquote('var(--#{$dark}-color)');
+  } @else {
+    @return string.unquote('var(--#{$light}-color)');
+  }
+}
