@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function Docs() {
+const Buttons = () => {
   return (
     <div>
       <h1>Docs | Buttons</h1>
@@ -272,4 +272,6 @@ export default function Docs() {
       </div>
     </div>
   );
-}
+};
+
+export default Buttons;

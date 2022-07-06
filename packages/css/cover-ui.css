@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /***
   The new CSS reset - version 1.6.1 (last updated 25.5.2022)
   GitHub page: https://github.com/elad2412/the-new-css-reset
@@ -51,10 +52,17 @@ textarea {
 /* Minimum style to allow to style meter element. */
 meter {
   -webkit-appearance: revert;
-  appearance: revert;
+  -moz-appearance: revert;
+       appearance: revert;
 }
 
 /* Reset default text opacity of input placeholder. */
+::-moz-placeholder {
+  color: unset;
+}
+:-ms-input-placeholder {
+  color: unset;
+}
 ::placeholder {
   color: unset;
 }
@@ -197,7 +205,10 @@ a.button-icon {
   cursor: pointer;
   outline: none;
   white-space: nowrap;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   font-size: var(--element-font-size);
   padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
   border-radius: var(--radius-small);
@@ -230,19 +241,6 @@ a.button-icon::before {
   opacity: 0;
   transition: background 0.5s, opacity 1s;
   z-index: -1;
-}
-button.button i,
-button.button-icon i,
-a.button i,
-a.button-icon i {
-  font-weight: 400;
-  font-style: normal;
-  font-variant: normal;
-  line-height: 1;
-  display: inline-block;
-  text-transform: none;
-  speak: none;
-  -webkit-font-smoothing: antialiased;
 }
 button.button.is-outlined,
 button.button-icon.is-outlined,
@@ -1055,6 +1053,14 @@ a.button.is-rounded,
 a.button-icon.is-rounded {
   border-radius: var(--radius-rounded);
 }
+@-webkit-keyframes spin-around {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
 @keyframes spin-around {
   from {
     transform: rotate(0deg);
@@ -1080,7 +1086,8 @@ a.button-icon.is-loading::before {
   top: calc(50% - 0.5em);
   height: 1em;
   width: 1em;
-  animation: spin-around 0.8s infinite linear;
+  -webkit-animation: spin-around 0.8s infinite linear;
+          animation: spin-around 0.8s infinite linear;
   border-radius: 50%;
   border: 2px solid rgb(var(--element-color));
   border-right-color: transparent;
@@ -1185,6 +1192,19 @@ a.button,
 a.button-icon {
     background-color: rgba(var(--element-color), 0.1);
   }
+  button.button i,
+button.button-icon i,
+a.button i,
+a.button-icon i {
+    font-weight: 400;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    display: inline-block;
+    text-transform: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+  }
   button.button.is-loading,
 button.button-icon.is-loading,
 a.button.is-loading,
@@ -1247,6 +1267,87 @@ a.button-icon:disabled.is-loading::before {
     opacity: 1;
   }
 }
+label.checkbox {
+  --element-color: var(--text-color);
+  --element-font-size: var(--size-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+label.checkbox input[type=checkbox] {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-size: var(--element-font-size);
+  padding: calc(var(--element-font-size) * 0.5);
+  border-radius: var(--radius-small);
+  border: 1px solid rgb(var(--text-color));
+  font-family: var(--font-family);
+  transition: background 0.2s linear;
+  background-color: rgba(var(--element-color), 0.04);
+  color: rgb(var(--element-color));
+  -webkit-tap-highlight-color: transparent;
+  margin: 1rem;
+  position: relative;
+  transform: translate3d(0, 0, 0);
+}
+label.checkbox input[type=checkbox]::before {
+  content: "";
+  position: absolute;
+  width: 250%;
+  height: 250%;
+  top: -75%;
+  left: -75%;
+  border-radius: 50%;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(var(--element-color)) 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1500%;
+  opacity: 0;
+  transition: background 0.5s, opacity 1s;
+  z-index: -1;
+}
+label.checkbox input[type=checkbox]:checked {
+  background-color: rgb(var(--element-color), 0.4);
+}
+label.checkbox input[type=checkbox]:checked::after {
+  content: "✓";
+  position: absolute;
+  font-size: calc(var(--element-font-size) * 0.8);
+}
+label.checkbox input[type=checkbox]:hover::before {
+  opacity: 0.06;
+  transition-duration: 0.2s;
+}
+label.checkbox input[type=checkbox]:focus-visible::before {
+  opacity: 0.1;
+  transition-duration: 0.2s;
+}
+label.checkbox input[type=checkbox]:active {
+  background-color: rgba(var(--element-color), 0.27);
+}
+label.checkbox input[type=checkbox]:active::before {
+  background-size: 0%;
+  opacity: 0.35;
+  transition-duration: 0s;
+}
+
 .m-0 {
   margin: var(--space-0) !important;
 }

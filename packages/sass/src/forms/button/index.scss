@@ -19,7 +19,6 @@
   a.button,
   a.button-icon {
     @include base.styles($theme);
-    @include icon.styles;
 
     @include variant-outlined.styles($theme);
     @include variant-contained.styles($theme);
@@ -46,6 +45,8 @@
     a.button,
     a.button-icon {
       @include base.dark-overrides;
+      @include icon.styles;
+
       @include modifier-loading.dark-overrides;
       @include modifier-disabled.dark-overrides;
     }
