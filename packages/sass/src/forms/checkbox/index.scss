@@ -1,90 +1,148 @@
+@use 'modifier-color';
+
 @mixin with-theme($theme) {
   label.checkbox {
-    --element-color: var(--text-color);
+    --element-color: var(--light-color);
     --element-font-size: var(--size-6);
 
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: fit-content;
     cursor: pointer;
     user-select: none;
 
     input[type='checkbox'] {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      outline: none;
-      white-space: nowrap;
-      user-select: none;
-      font-size: var(--element-font-size);
-      padding: calc(var(--element-font-size) * 0.5);
+      height: 22px;
+      width: 22px;
+      margin-right: 5px;
+      background-color: rgba(var(--element-color), 0.4);
+      transition: background-color 0.25s ease;
       border-radius: var(--radius-small);
-      border: 1px solid rgb(var(--text-color));
-      font-family: var(--font-family);
-      transition: background 0.2s linear;
-      background-color: rgba(var(--element-color), 0.04);
-      color: rgb(var(--element-color));
-      -webkit-tap-highlight-color: transparent;
-      margin: 1rem;
-
       position: relative;
-      transform: translate3d(0, 0, 0);
 
-      &::before {
+      &::after {
+        --contrast-color: var(--scale-7-color);
         content: '';
         position: absolute;
-        width: 250%;
-        height: 250%;
-        top: -75%;
-        left: -75%;
-        border-radius: 50%;
-        pointer-events: none;
-        background-image: radial-gradient(
-          circle,
-          rgb(var(--element-color)) 10%,
-          transparent 10.01%
-        );
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 1500%;
+        left: 8px;
+        top: 5px;
+        width: 6px;
+        height: 11px;
+        border-color: rgb(var(--contrast-color));
+        border-style: solid;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
         opacity: 0;
-        transition: background 0.5s, opacity 1s;
-        z-index: -1;
+        transition: opacity 0.25s ease;
       }
 
       &:checked {
-        background-color: rgb(var(--element-color), 0.4);
+        background-color: rgba(var(--element-color), 0.8);
+
         &::after {
-          content: '✓';
-          position: absolute;
-          font-size: calc(var(--element-font-size) * 0.8);
-        }
-      }
-
-      &:hover {
-        &::before {
-          opacity: 0.06;
-          transition-duration: 0.2s;
-        }
-      }
-
-      &:focus-visible {
-        &::before {
-          opacity: 0.1;
-          transition-duration: 0.2s;
-        }
-      }
-
-      &:active {
-        background-color: rgba(var(--element-color), 0.27);
-        &::before {
-          background-size: 0%;
-          opacity: 0.35;
-          transition-duration: 0s;
+          opacity: 1;
         }
       }
     }
+
+    @include modifier-color.styles($theme);
+  }
+
+  /* Dark mode button styles. */
+  @media (prefers-color-scheme: dark) {
+    label.checkbox {
+      background-color: rgba(var(--element-color), 0.1);
+    }
   }
 }
+
+// @mixin with-theme($theme) {
+//   label.checkbox {
+//     --element-color: var(--text-color);
+//     --element-font-size: var(--size-6);
+
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: fit-content;
+//     cursor: pointer;
+//     user-select: none;
+
+//     input[type='checkbox'] {
+//       display: inline-flex;
+//       justify-content: center;
+//       align-items: center;
+//       cursor: pointer;
+//       outline: none;
+//       white-space: nowrap;
+//       user-select: none;
+//       font-size: var(--element-font-size);
+//       padding: calc(var(--element-font-size) * 0.5);
+//       border-radius: var(--radius-small);
+//       border: 1px solid rgb(var(--text-color));
+//       font-family: var(--font-family);
+//       transition: background 0.2s linear;
+//       background-color: rgba(var(--element-color), 0.04);
+//       color: rgb(var(--element-color));
+//       -webkit-tap-highlight-color: transparent;
+//       margin: 1rem;
+
+//       position: relative;
+//       transform: translate3d(0, 0, 0);
+
+//       &::before {
+//         content: '';
+//         position: absolute;
+//         width: 250%;
+//         height: 250%;
+//         top: -75%;
+//         left: -75%;
+//         border-radius: 50%;
+//         pointer-events: none;
+//         background-image: radial-gradient(
+//           circle,
+//           rgb(var(--element-color)) 10%,
+//           transparent 10.01%
+//         );
+//         background-repeat: no-repeat;
+//         background-position: center;
+//         background-size: 1500%;
+//         opacity: 0;
+//         transition: background 0.5s, opacity 0.8s;
+//         z-index: -1;
+//       }
+
+//       &:checked {
+//         background-color: rgb(var(--element-color), 0.4);
+//         &::after {
+//           content: '✓';
+//           position: absolute;
+//           font-size: calc(var(--element-font-size) * 0.8);
+//         }
+//       }
+
+//       &:hover {
+//         &::before {
+//           opacity: 0.06;
+//           transition-duration: 0.2s;
+//         }
+//       }
+
+//       &:focus-visible {
+//         &::before {
+//           opacity: 0.1;
+//           transition-duration: 0.2s;
+//         }
+//       }
+
+//       &:active {
+//         background-color: rgba(var(--element-color), 0.27);
+//         &::before {
+//           background-size: 0%;
+//           opacity: 0.35;
+//           transition-duration: 0s;
+//         }
+//       }
+//     }
+//   }
+// }

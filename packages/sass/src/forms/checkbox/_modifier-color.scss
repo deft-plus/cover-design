@@ -1,0 +1,18 @@
+@use '../../core/functions' as f;
+@use '../../core/theming/object-keys';
+
+/// Loops over the colors from the theme to generate all the classes with colors.
+@mixin styles($theme) {
+  @each $color in object-keys.$color-keys {
+    &.is-#{$color} {
+      --element-color: #{f.get-color($theme, $color)};
+
+      input[type='checkbox'] {
+        &::after {
+          --contrast-color: #{f.contrast-color($theme, 'light', $color, 'scale-1', 'scale-7')};
+          border-color: rgb(var(--contrast-color));
+        }
+      }
+    }
+  }
+}
