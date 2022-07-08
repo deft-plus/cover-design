@@ -8,10 +8,11 @@ export const createCheckbox = (config: CreateButtonConfig) => {
   const container = document.createElement('div');
   container.classList.add('text-field');
 
-  const checkbox = document.createElement('input');
-  checkbox.type = 'text';
-  checkbox.id = 'default';
-  container.appendChild(checkbox);
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = 'default';
+  input.id = 'default';
+  container.appendChild(input);
 
   const label = document.createElement('label');
   label.appendChild(document.createTextNode('Default'));
@@ -27,10 +28,11 @@ export const createCheckbox = (config: CreateButtonConfig) => {
     const container = document.createElement('div');
     container.classList.add('text-field', `is-${color}`);
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'text';
-    checkbox.id = color;
-    container.appendChild(checkbox);
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = color;
+    input.id = color;
+    container.appendChild(input);
 
     const label = document.createElement('label');
     label.appendChild(document.createTextNode(startCase(color)));

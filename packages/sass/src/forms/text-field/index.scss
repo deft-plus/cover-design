@@ -1,17 +1,61 @@
+@use 'modifier-color';
+
 @mixin with-theme($theme) {
   div.text-field {
+    --element-color: var(--light-color);
+    --element-font-size: var(--size-6);
+
     display: inline-block;
     position: relative;
     padding: 5px;
     border-radius: var(--radius-small);
-    border: 1px solid rgb(var(--scale-2-color));
+    border: 1px solid rgb(var(--element-color));
 
     input[type='text'] {
+      font-size: 1em;
+      color: rgb(var(--element-color));
+      background-color: rgb(var(--background-color));
+      background-clip: padding-box;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+      & + label {
+        position: absolute;
+        display: block;
+        top: -0.5em;
+        font-size: 0.66em;
+        padding: 0px 5px;
+        font-size: 0.66em;
+        background-color: rgb(var(--background-color));
+        transition: font-size 0.1s ease-in-out, top 0.1s ease-in-out;
+        color: rgb(var(--element-color));
+      }
+
+      &::placeholder {
+        opacity: 0;
+      }
+
+      &:placeholder-shown {
+        padding-top: 0;
+        font-size: 1em;
+
+        &:focus-visible {
+          &::placeholder {
+            opacity: 1;
+          }
+
+          & + label {
+            top: -0.5em;
+            font-size: 0.66em;
+          }
+        }
+
+        & + label {
+          top: 0.3em;
+          font-size: 1em;
+        }
+      }
     }
 
-    label {
-      position: absolute;
-      left: 5px;
-    }
+    @include modifier-color.styles($theme);
   }
 }
