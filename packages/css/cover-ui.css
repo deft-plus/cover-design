@@ -51,17 +51,10 @@ textarea {
 /* Minimum style to allow to style meter element. */
 meter {
   -webkit-appearance: revert;
-  -moz-appearance: revert;
-       appearance: revert;
+  appearance: revert;
 }
 
 /* Reset default text opacity of input placeholder. */
-::-moz-placeholder {
-  color: unset;
-}
-:-ms-input-placeholder {
-  color: unset;
-}
 ::placeholder {
   color: unset;
 }
@@ -204,10 +197,7 @@ a.button-icon {
   cursor: pointer;
   outline: none;
   white-space: nowrap;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   font-size: var(--element-font-size);
   padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
   border-radius: var(--radius-small);
@@ -1052,14 +1042,6 @@ a.button.is-rounded,
 a.button-icon.is-rounded {
   border-radius: var(--radius-rounded);
 }
-@-webkit-keyframes spin-around {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
 @keyframes spin-around {
   from {
     transform: rotate(0deg);
@@ -1085,8 +1067,7 @@ a.button-icon.is-loading::before {
   top: calc(50% - 0.5em);
   height: 1em;
   width: 1em;
-  -webkit-animation: spin-around 0.8s infinite linear;
-          animation: spin-around 0.8s infinite linear;
+  animation: spin-around 0.8s infinite linear;
   border-radius: 50%;
   border: 2px solid rgb(var(--element-color));
   border-right-color: transparent;
@@ -1273,10 +1254,7 @@ label.checkbox {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 label.checkbox input[type=checkbox] {
   height: 22px;
@@ -1559,6 +1537,267 @@ label.checkbox.is-error {
 label.checkbox.is-error input[type=checkbox]::after {
   --contrast-color: var(--scale-1-color);
   border-color: rgb(var(--contrast-color));
+}
+
+/* Dark mode button styles. */
+@media (prefers-color-scheme: dark) {
+  label.checkbox {
+    background-color: rgba(var(--element-color), 0.1);
+  }
+}
+label.switch {
+  --element-color: var(--light-color);
+  --element-font-size: var(--size-6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+label.switch input[type=checkbox] {
+  height: 22px;
+  width: 40px;
+  margin-right: 5px;
+  background-color: rgba(var(--element-color), 0.4);
+  transition: background-color 0.25s ease;
+  border-radius: var(--radius-rounded);
+  position: relative;
+}
+label.switch input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 16px;
+  height: 16px;
+  display: block;
+  background-color: rgb(var(--contrast-color));
+  border-radius: 50%;
+  transition: left 0.25s ease;
+}
+label.switch input[type=checkbox]:checked {
+  background-color: rgba(var(--element-color), 0.8);
+}
+label.switch input[type=checkbox]:checked::after {
+  left: 21px;
+  opacity: 1;
+}
+label.switch.is-white {
+  --element-color: var(--white-color);
+}
+label.switch.is-white input[type=checkbox]::after {
+  --contrast-color: var(--scale-5-color);
+}
+label.switch.is-light {
+  --element-color: var(--light-color);
+}
+label.switch.is-light input[type=checkbox]::after {
+  --contrast-color: var(--scale-5-color);
+}
+label.switch.is-dark {
+  --element-color: var(--dark-color);
+}
+label.switch.is-dark input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-black {
+  --element-color: var(--black-color);
+}
+label.switch.is-black input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-scale-1 {
+  --element-color: var(--scale-1-color);
+}
+label.switch.is-scale-1 input[type=checkbox]::after {
+  --contrast-color: var(--scale-5-color);
+}
+label.switch.is-scale-2 {
+  --element-color: var(--scale-2-color);
+}
+label.switch.is-scale-2 input[type=checkbox]::after {
+  --contrast-color: var(--scale-5-color);
+}
+label.switch.is-scale-3 {
+  --element-color: var(--scale-3-color);
+}
+label.switch.is-scale-3 input[type=checkbox]::after {
+  --contrast-color: var(--scale-5-color);
+}
+label.switch.is-scale-4 {
+  --element-color: var(--scale-4-color);
+}
+label.switch.is-scale-4 input[type=checkbox]::after {
+  --contrast-color: var(--scale-5-color);
+}
+label.switch.is-scale-5 {
+  --element-color: var(--scale-5-color);
+}
+label.switch.is-scale-5 input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-scale-6 {
+  --element-color: var(--scale-6-color);
+}
+label.switch.is-scale-6 input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-scale-7 {
+  --element-color: var(--scale-7-color);
+}
+label.switch.is-scale-7 input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-red {
+  --element-color: var(--red-color);
+}
+label.switch.is-red input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-pink {
+  --element-color: var(--pink-color);
+}
+label.switch.is-pink input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-purple {
+  --element-color: var(--purple-color);
+}
+label.switch.is-purple input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-deep-purple {
+  --element-color: var(--deep-purple-color);
+}
+label.switch.is-deep-purple input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-indigo {
+  --element-color: var(--indigo-color);
+}
+label.switch.is-indigo input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-blue {
+  --element-color: var(--blue-color);
+}
+label.switch.is-blue input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-light-blue {
+  --element-color: var(--light-blue-color);
+}
+label.switch.is-light-blue input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-cyan {
+  --element-color: var(--cyan-color);
+}
+label.switch.is-cyan input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-teal {
+  --element-color: var(--teal-color);
+}
+label.switch.is-teal input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-green {
+  --element-color: var(--green-color);
+}
+label.switch.is-green input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-light-green {
+  --element-color: var(--light-green-color);
+}
+label.switch.is-light-green input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-lime {
+  --element-color: var(--lime-color);
+}
+label.switch.is-lime input[type=checkbox]::after {
+  --contrast-color: var(--scale-5-color);
+}
+label.switch.is-yellow {
+  --element-color: var(--yellow-color);
+}
+label.switch.is-yellow input[type=checkbox]::after {
+  --contrast-color: var(--scale-5-color);
+}
+label.switch.is-amber {
+  --element-color: var(--amber-color);
+}
+label.switch.is-amber input[type=checkbox]::after {
+  --contrast-color: var(--scale-5-color);
+}
+label.switch.is-orange {
+  --element-color: var(--orange-color);
+}
+label.switch.is-orange input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-deep-orange {
+  --element-color: var(--deep-orange-color);
+}
+label.switch.is-deep-orange input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-brown {
+  --element-color: var(--brown-color);
+}
+label.switch.is-brown input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-grey {
+  --element-color: var(--grey-color);
+}
+label.switch.is-grey input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-blue-grey {
+  --element-color: var(--blue-grey-color);
+}
+label.switch.is-blue-grey input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-primary {
+  --element-color: var(--primary-color);
+}
+label.switch.is-primary input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-secondary {
+  --element-color: var(--secondary-color);
+}
+label.switch.is-secondary input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-info {
+  --element-color: var(--info-color);
+}
+label.switch.is-info input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-success {
+  --element-color: var(--success-color);
+}
+label.switch.is-success input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-warning {
+  --element-color: var(--warning-color);
+}
+label.switch.is-warning input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
+}
+label.switch.is-error {
+  --element-color: var(--error-color);
+}
+label.switch.is-error input[type=checkbox]::after {
+  --contrast-color: var(--white-color);
 }
 
 /* Dark mode button styles. */

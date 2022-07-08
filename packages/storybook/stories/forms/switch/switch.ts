@@ -1,12 +1,12 @@
 import { startCase } from 'lodash';
 
-export type CreateCheckboxConfig = {};
+export type CreateSwitchConfig = {};
 
-export const createCheckbox = (config: CreateCheckboxConfig) => {
+export const createSwitch = (config: CreateSwitchConfig) => {
   const div = document.createElement('div');
 
   const container = document.createElement('div');
-  container.classList.add('checkbox');
+  container.classList.add('switch');
 
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
@@ -23,9 +23,9 @@ export const createCheckbox = (config: CreateCheckboxConfig) => {
   div.appendChild(container);
   div.appendChild(separator);
 
-  checkboxColors.forEach(color => {
+  switchColors.forEach(color => {
     const container = document.createElement('div');
-    container.classList.add('checkbox', `is-${color}`);
+    container.classList.add('switch', `is-${color}`);
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -45,7 +45,7 @@ export const createCheckbox = (config: CreateCheckboxConfig) => {
   return div;
 };
 
-export const checkboxColors = [
+export const switchColors = [
   'white',
   'light',
   'dark',

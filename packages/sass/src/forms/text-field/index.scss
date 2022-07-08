@@ -1,0 +1,17 @@
+@mixin with-theme($theme) {
+  div.text-field {
+    display: inline-block;
+    position: relative;
+    padding: 5px;
+    border-radius: var(--radius-small);
+    border: 1px solid rgb(var(--scale-2-color));
+
+    input[type='text'] {
+    }
+
+    label {
+      position: absolute;
+      left: 5px;
+    }
+  }
+}

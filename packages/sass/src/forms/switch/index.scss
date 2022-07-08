@@ -1,0 +1,56 @@
+@use 'modifier-color';
+
+@mixin with-theme($theme) {
+  div.switch {
+    --element-color: var(--light-color);
+    --element-font-size: var(--size-6);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+
+    input[type='checkbox'] {
+      height: 22px;
+      width: 40px;
+      margin-right: 5px;
+      background-color: rgba(var(--element-color), 0.4);
+      transition: background-color 0.25s ease;
+      border-radius: var(--radius-rounded);
+      position: relative;
+
+      &::after {
+        --contrast-color: var(--white-color);
+        content: '';
+        position: absolute;
+        left: 3px;
+        top: 3px;
+        width: 16px;
+        height: 16px;
+        display: block;
+        background-color: rgb(var(--contrast-color));
+        border-radius: 50%;
+        transition: left 0.25s ease;
+      }
+
+      &:checked {
+        background-color: rgba(var(--element-color), 0.8);
+
+        &::after {
+          left: 21px;
+          opacity: 1;
+        }
+      }
+    }
+
+    @include modifier-color.styles($theme);
+  }
+
+  /* Dark mode button styles. */
+  @media (prefers-color-scheme: dark) {
+    label.checkbox {
+      background-color: rgba(var(--element-color), 0.1);
+    }
+  }
+}

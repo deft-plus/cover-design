@@ -1,7 +1,7 @@
 @use 'modifier-color';
 
 @mixin with-theme($theme) {
-  label.checkbox {
+  div.checkbox {
     --element-color: var(--light-color);
     --element-font-size: var(--size-6);
 

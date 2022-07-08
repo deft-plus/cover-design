@@ -5,8 +5,10 @@
 // Elements.
 @use '../base' as base;
 
-@use '../../forms/button' as button;
-@use '../../forms/checkbox' as checkbox;
+@use '../../forms/button';
+@use '../../forms/checkbox';
+@use '../../forms/switch';
+@use '../../forms/text-field';
 
 @use '../../helpers/spacing' as spacing;
 
@@ -15,6 +17,8 @@
   @include base.with-theme($theme);
   @include button.with-theme($theme);
   @include checkbox.with-theme($theme);
+  @include switch.with-theme($theme);
+  @include text-field.with-theme($theme);
 
   @include spacing.with-theme($theme);
 }
