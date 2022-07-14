@@ -12,8 +12,8 @@
 
   html,
   body {
-    color: rgb(var(--text-color));
-    background-color: rgb(var(--background-color));
+    color: rgb(var(--text-primary-color));
+    background-color: rgb(var(--background-main-color));
     height: 100%;
     font-family: var(--font-family);
   }

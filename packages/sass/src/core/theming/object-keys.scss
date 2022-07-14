@@ -11,7 +11,15 @@ $colors: 'primary', 'secondary', 'info', 'success', 'warning', 'error';
 /// List with all of the allowed keys to use in the theme.
 $theme-keys: list.join(
   $colors,
-  ('text', 'soft-text', 'hint-text', 'inverted-text', 'background', 'paper', 'divider')
+  (
+    'text-primary',
+    'text-secondary',
+    'text-disabled',
+    'text-inverted',
+    'background-main',
+    'background-sheet',
+    'divider'
+  )
 );
 
 /// List with all of the allowed keys to use in the complete theme returned by the define-theme function.

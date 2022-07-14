@@ -42,7 +42,7 @@
 @mixin disabled-overrides {
   &.is-loading {
     &::before {
-      border: 2px solid rgba(var(--text-color), 0.4);
+      border: 2px solid rgba(var(--text-primary-color), 0.4);
       border-right-color: transparent;
       border-top-color: transparent;
       opacity: 1;

@@ -21,7 +21,7 @@
       position: relative;
 
       &::after {
-        --contrast-color: var(--white-color);
+        --contrast-color: var(--scale-1-color);
         content: '';
         position: absolute;
         left: 3px;
@@ -49,8 +49,18 @@
 
   /* Dark mode button styles. */
   @media (prefers-color-scheme: dark) {
-    label.checkbox {
-      background-color: rgba(var(--element-color), 0.1);
+    div.switch {
+      input[type='checkbox'] {
+        background-color: rgba(var(--element-color), 0.5);
+
+        &::after {
+          --contrast-color: var(--scale-3-color);
+        }
+
+        &:checked {
+          background-color: rgba(var(--element-color), 0.9);
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 /// Base styles for the button.
 @mixin styles($theme) {
-  --element-color: var(--text-color);
+  --element-color: var(--text-primary-color);
   --element-font-size: var(--size-6);
 
   display: inline-flex;

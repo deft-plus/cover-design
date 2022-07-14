@@ -51,10 +51,17 @@ textarea {
 /* Minimum style to allow to style meter element. */
 meter {
   -webkit-appearance: revert;
-  appearance: revert;
+  -moz-appearance: revert;
+       appearance: revert;
 }
 
 /* Reset default text opacity of input placeholder. */
+::-moz-placeholder {
+  color: unset;
+}
+:-ms-input-placeholder {
+  color: unset;
+}
 ::placeholder {
   color: unset;
 }
@@ -143,17 +150,17 @@ meter {
   --radius-large: 7px;
   --radius-rounded: 9999px;
   --primary-color: var(--teal-color);
-  --secondary-color: var(--green-color);
+  --secondary-color: var(--pink-color);
   --info-color: var(--teal-color);
   --success-color: var(--light-green-color);
-  --warning-color: var(--orange-color);
-  --error-color: var(--pink-color);
-  --text-color: var(--scale-5-color);
-  --soft-text-color: var(--scale-4-color);
-  --hint-text-color: var(--scale-3-color);
-  --inverted-text-color: var(--scale-2-color);
-  --background-color: var(--white-color);
-  --paper-color: var(--scale-2-color);
+  --warning-color: var(--amber-color);
+  --error-color: var(--red-color);
+  --text-primary-color: var(--scale-5-color);
+  --text-secondary-color: var(--scale-4-color);
+  --text-disabled-color: var(--scale-3-color);
+  --text-inverted-color: var(--scale-1-color);
+  --background-main-color: var(--white-color);
+  --background-sheet-color: var(--scale-2-color);
   --divider-color: var(--scale-1-color);
 }
 
@@ -163,23 +170,23 @@ meter {
 ::after {
     --primary-color: var(--green-color);
     --secondary-color: var(--pink-color);
-    --info-color: var(--teal-color);
-    --success-color: var(--light-green-color);
-    --warning-color: var(--orange-color);
-    --error-color: var(--pink-color);
-    --text-color: var(--scale-3-color);
-    --soft-text-color: var(--scale-4-color);
-    --hint-text-color: var(--scale-5-color);
-    --inverted-text-color: var(--scale-6-color);
-    --background-color: var(--black-color);
-    --paper-color: var(--scale-6-color);
+    --info-color: var(--blue-color);
+    --success-color: var(--green-color);
+    --warning-color: var(--amber-color);
+    --error-color: var(--red-color);
+    --text-primary-color: var(--scale-3-color);
+    --text-secondary-color: var(--scale-4-color);
+    --text-disabled-color: var(--scale-5-color);
+    --text-inverted-color: var(--scale-7-color);
+    --background-main-color: var(--black-color);
+    --background-sheet-color: var(--scale-6-color);
     --divider-color: var(--scale-7-color);
   }
 }
 html,
 body {
-  color: rgb(var(--text-color));
-  background-color: rgb(var(--background-color));
+  color: rgb(var(--text-primary-color));
+  background-color: rgb(var(--background-main-color));
   height: 100%;
   font-family: var(--font-family);
 }
@@ -189,7 +196,7 @@ button.button,
 button.button-icon,
 a.button,
 a.button-icon {
-  --element-color: var(--text-color);
+  --element-color: var(--text-primary-color);
   --element-font-size: var(--size-6);
   display: inline-flex;
   justify-content: center;
@@ -197,7 +204,10 @@ a.button-icon {
   cursor: pointer;
   outline: none;
   white-space: nowrap;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   font-size: var(--element-font-size);
   padding: calc(var(--element-font-size) * 0.37) calc(var(--element-font-size) * 1.8);
   border-radius: var(--radius-small);
@@ -243,10 +253,10 @@ button.button.is-contained,
 button.button-icon.is-contained,
 a.button.is-contained,
 a.button-icon.is-contained {
-  --element-color: var(--paper-color);
+  --element-color: var(--background-sheet-color);
   border: 1px solid transparent;
   background-color: rgba(var(--element-color), 1);
-  color: rgb(var(--text-color));
+  color: rgb(var(--text-primary-color));
 }
 button.button.is-contained:hover,
 button.button-icon.is-contained:hover,
@@ -276,7 +286,7 @@ button.button:focus-visible,
 button.button-icon:focus-visible,
 a.button:focus-visible,
 a.button-icon:focus-visible {
-  border: 1px solid rgb(var(--text-color));
+  border: 1px solid rgb(var(--text-primary-color));
 }
 button.button:active,
 button.button-icon:active,
@@ -1042,6 +1052,14 @@ a.button.is-rounded,
 a.button-icon.is-rounded {
   border-radius: var(--radius-rounded);
 }
+@-webkit-keyframes spin-around {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
 @keyframes spin-around {
   from {
     transform: rotate(0deg);
@@ -1067,7 +1085,8 @@ a.button-icon.is-loading::before {
   top: calc(50% - 0.5em);
   height: 1em;
   width: 1em;
-  animation: spin-around 0.8s infinite linear;
+  -webkit-animation: spin-around 0.8s infinite linear;
+          animation: spin-around 0.8s infinite linear;
   border-radius: 50%;
   border: 2px solid rgb(var(--element-color));
   border-right-color: transparent;
@@ -1085,7 +1104,7 @@ button.button.is-loading.is-contained::before,
 button.button-icon.is-loading.is-contained::before,
 a.button.is-loading.is-contained::before,
 a.button-icon.is-loading.is-contained::before {
-  border: 2px solid rgb(var(--contrast-color, var(--text-color)));
+  border: 2px solid rgb(var(--contrast-color, var(--text-primary-color)));
   border-right-color: transparent;
   border-top-color: transparent;
 }
@@ -1099,8 +1118,8 @@ button.button:disabled,
 button.button-icon:disabled,
 a.button:disabled,
 a.button-icon:disabled {
-  background-color: rgb(var(--text-color), 0.04);
-  color: rgba(var(--text-color), 0.3);
+  background-color: rgb(var(--text-primary-color), 0.04);
+  color: rgba(var(--text-primary-color), 0.3);
   cursor: default;
 }
 button.button:disabled::before,
@@ -1113,13 +1132,13 @@ button.button:disabled:hover,
 button.button-icon:disabled:hover,
 a.button:disabled:hover,
 a.button-icon:disabled:hover {
-  background-color: rgb(var(--text-color), 0.04);
+  background-color: rgb(var(--text-primary-color), 0.04);
 }
 button.button:disabled:active,
 button.button-icon:disabled:active,
 a.button:disabled:active,
 a.button-icon:disabled:active {
-  background-color: rgb(var(--text-color), 0.04);
+  background-color: rgb(var(--text-primary-color), 0.04);
 }
 button.button:disabled:active::before,
 button.button-icon:disabled:active::before,
@@ -1131,16 +1150,16 @@ button.button:disabled.is-outlined,
 button.button-icon:disabled.is-outlined,
 a.button:disabled.is-outlined,
 a.button-icon:disabled.is-outlined {
-  border: 1px solid rgba(var(--text-color), 0.3);
-  background-color: rgba(var(--text-color), 0);
-  color: rgba(var(--text-color), 0.6);
+  border: 1px solid rgba(var(--text-primary-color), 0.3);
+  background-color: rgba(var(--text-primary-color), 0);
+  color: rgba(var(--text-primary-color), 0.6);
 }
 button.button:disabled.is-contained,
 button.button-icon:disabled.is-contained,
 a.button:disabled.is-contained,
 a.button-icon:disabled.is-contained {
-  background-color: rgb(var(--text-color), 0.3);
-  color: rgba(var(--text-color), 0.6);
+  background-color: rgb(var(--text-primary-color), 0.3);
+  color: rgba(var(--text-primary-color), 0.6);
 }
 button.button:disabled.is-contained::before,
 button.button-icon:disabled.is-contained::before,
@@ -1152,7 +1171,7 @@ button.button:disabled.is-loading::before,
 button.button-icon:disabled.is-loading::before,
 a.button:disabled.is-loading::before,
 a.button-icon:disabled.is-loading::before {
-  border: 2px solid rgba(var(--text-color), 0.4);
+  border: 2px solid rgba(var(--text-primary-color), 0.4);
   border-right-color: transparent;
   border-top-color: transparent;
   opacity: 1;
@@ -1195,20 +1214,20 @@ a.button-icon.is-loading {
 button.button-icon:disabled,
 a.button:disabled,
 a.button-icon:disabled {
-    background-color: rgb(var(--text-color), 0.1);
-    color: rgba(var(--text-color), 0.3);
+    background-color: rgb(var(--text-primary-color), 0.1);
+    color: rgba(var(--text-primary-color), 0.3);
   }
   button.button:disabled:hover,
 button.button-icon:disabled:hover,
 a.button:disabled:hover,
 a.button-icon:disabled:hover {
-    background-color: rgb(var(--text-color), 0.1);
+    background-color: rgb(var(--text-primary-color), 0.1);
   }
   button.button:disabled:active,
 button.button-icon:disabled:active,
 a.button:disabled:active,
 a.button-icon:disabled:active {
-    background-color: rgb(var(--text-color), 0.1);
+    background-color: rgb(var(--text-primary-color), 0.1);
   }
   button.button:disabled:active::before,
 button.button-icon:disabled:active::before,
@@ -1220,16 +1239,16 @@ a.button-icon:disabled:active::before {
 button.button-icon:disabled.is-outlined,
 a.button:disabled.is-outlined,
 a.button-icon:disabled.is-outlined {
-    border: 1px solid rgba(var(--text-color), 0.3);
-    background-color: rgba(var(--text-color), 0);
-    color: rgba(var(--text-color), 0.6);
+    border: 1px solid rgba(var(--text-primary-color), 0.3);
+    background-color: rgba(var(--text-primary-color), 0);
+    color: rgba(var(--text-primary-color), 0.6);
   }
   button.button:disabled.is-contained,
 button.button-icon:disabled.is-contained,
 a.button:disabled.is-contained,
 a.button-icon:disabled.is-contained {
-    background-color: rgb(var(--text-color), 0.3);
-    color: rgba(var(--text-color), 0.6);
+    background-color: rgb(var(--text-primary-color), 0.3);
+    color: rgba(var(--text-primary-color), 0.6);
   }
   button.button:disabled.is-contained::before,
 button.button-icon:disabled.is-contained::before,
@@ -1241,7 +1260,7 @@ a.button-icon:disabled.is-contained::before {
 button.button-icon:disabled.is-loading::before,
 a.button:disabled.is-loading::before,
 a.button-icon:disabled.is-loading::before {
-    border: 2px solid rgba(var(--text-color), 0.4);
+    border: 2px solid rgba(var(--text-primary-color), 0.4);
     border-right-color: transparent;
     border-top-color: transparent;
     opacity: 1;
@@ -1254,7 +1273,10 @@ div.checkbox {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 div.checkbox input[type=checkbox] {
   height: 22px;
@@ -1552,7 +1574,10 @@ div.switch {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 div.switch input[type=checkbox] {
   height: 22px;
@@ -1564,7 +1589,7 @@ div.switch input[type=checkbox] {
   position: relative;
 }
 div.switch input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
+  --contrast-color: var(--scale-1-color);
   content: "";
   position: absolute;
   left: 3px;
@@ -1586,240 +1611,318 @@ div.switch input[type=checkbox]:checked::after {
 div.switch.is-white {
   --element-color: var(--white-color);
 }
-div.switch.is-white input[type=checkbox]::after {
-  --contrast-color: var(--scale-5-color);
-}
 div.switch.is-light {
   --element-color: var(--light-color);
-}
-div.switch.is-light input[type=checkbox]::after {
-  --contrast-color: var(--scale-5-color);
 }
 div.switch.is-dark {
   --element-color: var(--dark-color);
 }
-div.switch.is-dark input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-black {
   --element-color: var(--black-color);
-}
-div.switch.is-black input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-scale-1 {
   --element-color: var(--scale-1-color);
 }
-div.switch.is-scale-1 input[type=checkbox]::after {
-  --contrast-color: var(--scale-5-color);
-}
 div.switch.is-scale-2 {
   --element-color: var(--scale-2-color);
-}
-div.switch.is-scale-2 input[type=checkbox]::after {
-  --contrast-color: var(--scale-5-color);
 }
 div.switch.is-scale-3 {
   --element-color: var(--scale-3-color);
 }
-div.switch.is-scale-3 input[type=checkbox]::after {
-  --contrast-color: var(--scale-5-color);
-}
 div.switch.is-scale-4 {
   --element-color: var(--scale-4-color);
-}
-div.switch.is-scale-4 input[type=checkbox]::after {
-  --contrast-color: var(--scale-5-color);
 }
 div.switch.is-scale-5 {
   --element-color: var(--scale-5-color);
 }
-div.switch.is-scale-5 input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-scale-6 {
   --element-color: var(--scale-6-color);
-}
-div.switch.is-scale-6 input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-scale-7 {
   --element-color: var(--scale-7-color);
 }
-div.switch.is-scale-7 input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-red {
   --element-color: var(--red-color);
-}
-div.switch.is-red input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-pink {
   --element-color: var(--pink-color);
 }
-div.switch.is-pink input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-purple {
   --element-color: var(--purple-color);
-}
-div.switch.is-purple input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-deep-purple {
   --element-color: var(--deep-purple-color);
 }
-div.switch.is-deep-purple input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-indigo {
   --element-color: var(--indigo-color);
-}
-div.switch.is-indigo input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-blue {
   --element-color: var(--blue-color);
 }
-div.switch.is-blue input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-light-blue {
   --element-color: var(--light-blue-color);
-}
-div.switch.is-light-blue input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-cyan {
   --element-color: var(--cyan-color);
 }
-div.switch.is-cyan input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-teal {
   --element-color: var(--teal-color);
-}
-div.switch.is-teal input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-green {
   --element-color: var(--green-color);
 }
-div.switch.is-green input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-light-green {
   --element-color: var(--light-green-color);
-}
-div.switch.is-light-green input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-lime {
   --element-color: var(--lime-color);
 }
-div.switch.is-lime input[type=checkbox]::after {
-  --contrast-color: var(--scale-5-color);
-}
 div.switch.is-yellow {
   --element-color: var(--yellow-color);
-}
-div.switch.is-yellow input[type=checkbox]::after {
-  --contrast-color: var(--scale-5-color);
 }
 div.switch.is-amber {
   --element-color: var(--amber-color);
 }
-div.switch.is-amber input[type=checkbox]::after {
-  --contrast-color: var(--scale-5-color);
-}
 div.switch.is-orange {
   --element-color: var(--orange-color);
-}
-div.switch.is-orange input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-deep-orange {
   --element-color: var(--deep-orange-color);
 }
-div.switch.is-deep-orange input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-brown {
   --element-color: var(--brown-color);
-}
-div.switch.is-brown input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-grey {
   --element-color: var(--grey-color);
 }
-div.switch.is-grey input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-blue-grey {
   --element-color: var(--blue-grey-color);
-}
-div.switch.is-blue-grey input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-primary {
   --element-color: var(--primary-color);
 }
-div.switch.is-primary input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-secondary {
   --element-color: var(--secondary-color);
-}
-div.switch.is-secondary input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-info {
   --element-color: var(--info-color);
 }
-div.switch.is-info input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-success {
   --element-color: var(--success-color);
-}
-div.switch.is-success input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 div.switch.is-warning {
   --element-color: var(--warning-color);
 }
-div.switch.is-warning input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
-}
 div.switch.is-error {
   --element-color: var(--error-color);
-}
-div.switch.is-error input[type=checkbox]::after {
-  --contrast-color: var(--white-color);
 }
 
 /* Dark mode button styles. */
 @media (prefers-color-scheme: dark) {
-  label.checkbox {
-    background-color: rgba(var(--element-color), 0.1);
+  div.switch input[type=checkbox] {
+    background-color: rgba(var(--element-color), 0.5);
+  }
+  div.switch input[type=checkbox]::after {
+    --contrast-color: var(--scale-3-color);
+  }
+  div.switch input[type=checkbox]:checked {
+    background-color: rgba(var(--element-color), 0.9);
   }
 }
 div.text-field {
+  --element-color: var(--light-color);
+  --element-font-size: var(--size-6);
   display: inline-block;
   position: relative;
   padding: 5px;
   border-radius: var(--radius-small);
-  border: 1px solid rgb(var(--scale-2-color));
+  border: 1px solid rgb(var(--element-color));
 }
-div.text-field input[type=text]:focus-within ~ label {
-  top: -10px;
+div.text-field input[type=text] {
+  font-size: 1em;
+  color: rgb(var(--element-color));
+  background-color: rgb(var(--background-main-color));
+  background-clip: padding-box;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-div.text-field label {
+div.text-field input[type=text] + label {
   position: absolute;
-  left: 5px;
-  pointer-events: none;
+  display: block;
+  top: -0.5em;
+  font-size: 0.66em;
+  padding: 0px 5px;
+  font-size: 0.66em;
+  background-color: rgb(var(--background-main-color));
+  transition: font-size 0.1s ease-in-out, top 0.1s ease-in-out;
+  color: rgb(var(--element-color));
+}
+div.text-field input[type=text]::-moz-placeholder {
+  opacity: 0;
+}
+div.text-field input[type=text]:-ms-input-placeholder {
+  opacity: 0;
+}
+div.text-field input[type=text]::placeholder {
+  opacity: 0;
+}
+div.text-field input[type=text]:-moz-placeholder-shown {
+  padding-top: 0;
+  font-size: 1em;
+}
+div.text-field input[type=text]:-ms-input-placeholder {
+  padding-top: 0;
+  font-size: 1em;
+}
+div.text-field input[type=text]:placeholder-shown {
+  padding-top: 0;
+  font-size: 1em;
+}
+div.text-field input[type=text]:placeholder-shown:focus-visible::-moz-placeholder {
+  opacity: 1;
+}
+div.text-field input[type=text]:placeholder-shown:focus-visible:-ms-input-placeholder {
+  opacity: 1;
+}
+div.text-field input[type=text]:-moz-placeholder-shown:focus-visible::placeholder {
+  opacity: 1;
+}
+div.text-field input[type=text]:-ms-input-placeholder:focus-visible::placeholder {
+  opacity: 1;
+}
+div.text-field input[type=text]:placeholder-shown:focus-visible::placeholder {
+  opacity: 1;
+}
+div.text-field input[type=text]:-moz-placeholder-shown:focus-visible + label {
+  top: -0.5em;
+  font-size: 0.66em;
+}
+div.text-field input[type=text]:-ms-input-placeholder:focus-visible + label {
+  top: -0.5em;
+  font-size: 0.66em;
+}
+div.text-field input[type=text]:placeholder-shown:focus-visible + label {
+  top: -0.5em;
+  font-size: 0.66em;
+}
+div.text-field input[type=text]:-moz-placeholder-shown + label {
+  top: 0.3em;
+  font-size: 1em;
+}
+div.text-field input[type=text]:-ms-input-placeholder + label {
+  top: 0.3em;
+  font-size: 1em;
+}
+div.text-field input[type=text]:placeholder-shown + label {
+  top: 0.3em;
+  font-size: 1em;
+}
+div.text-field.is-white {
+  --element-color: var(--white-color);
+}
+div.text-field.is-light {
+  --element-color: var(--light-color);
+}
+div.text-field.is-dark {
+  --element-color: var(--dark-color);
+}
+div.text-field.is-black {
+  --element-color: var(--black-color);
+}
+div.text-field.is-scale-1 {
+  --element-color: var(--scale-1-color);
+}
+div.text-field.is-scale-2 {
+  --element-color: var(--scale-2-color);
+}
+div.text-field.is-scale-3 {
+  --element-color: var(--scale-3-color);
+}
+div.text-field.is-scale-4 {
+  --element-color: var(--scale-4-color);
+}
+div.text-field.is-scale-5 {
+  --element-color: var(--scale-5-color);
+}
+div.text-field.is-scale-6 {
+  --element-color: var(--scale-6-color);
+}
+div.text-field.is-scale-7 {
+  --element-color: var(--scale-7-color);
+}
+div.text-field.is-red {
+  --element-color: var(--red-color);
+}
+div.text-field.is-pink {
+  --element-color: var(--pink-color);
+}
+div.text-field.is-purple {
+  --element-color: var(--purple-color);
+}
+div.text-field.is-deep-purple {
+  --element-color: var(--deep-purple-color);
+}
+div.text-field.is-indigo {
+  --element-color: var(--indigo-color);
+}
+div.text-field.is-blue {
+  --element-color: var(--blue-color);
+}
+div.text-field.is-light-blue {
+  --element-color: var(--light-blue-color);
+}
+div.text-field.is-cyan {
+  --element-color: var(--cyan-color);
+}
+div.text-field.is-teal {
+  --element-color: var(--teal-color);
+}
+div.text-field.is-green {
+  --element-color: var(--green-color);
+}
+div.text-field.is-light-green {
+  --element-color: var(--light-green-color);
+}
+div.text-field.is-lime {
+  --element-color: var(--lime-color);
+}
+div.text-field.is-yellow {
+  --element-color: var(--yellow-color);
+}
+div.text-field.is-amber {
+  --element-color: var(--amber-color);
+}
+div.text-field.is-orange {
+  --element-color: var(--orange-color);
+}
+div.text-field.is-deep-orange {
+  --element-color: var(--deep-orange-color);
+}
+div.text-field.is-brown {
+  --element-color: var(--brown-color);
+}
+div.text-field.is-grey {
+  --element-color: var(--grey-color);
+}
+div.text-field.is-blue-grey {
+  --element-color: var(--blue-grey-color);
+}
+div.text-field.is-primary {
+  --element-color: var(--primary-color);
+}
+div.text-field.is-secondary {
+  --element-color: var(--secondary-color);
+}
+div.text-field.is-info {
+  --element-color: var(--info-color);
+}
+div.text-field.is-success {
+  --element-color: var(--success-color);
+}
+div.text-field.is-warning {
+  --element-color: var(--warning-color);
+}
+div.text-field.is-error {
+  --element-color: var(--error-color);
 }
 
 .m-0 {
