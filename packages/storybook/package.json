@@ -2,6 +2,7 @@
   "name": "@cover-ui/storybook",
   "version": "0.0.0",
   "author": "Deft+",
+  "private": true,
   "description": "Storybook UI for Cover UI",
   "repository": {
     "type": "git",

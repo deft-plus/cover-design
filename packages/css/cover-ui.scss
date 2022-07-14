@@ -1,3 +1,11 @@
 @use '../../node_modules/@cover-ui/sass/src/cover-ui.scss' as cui;
 
-@include cui.use-theme(cui.define-theme(cui.$default-theme, cui.$default-variables));
+// Theme and variables to use.
+$theme: cui.$default-theme;
+$variables: cui.$default-variables;
+
+// Defines the cover ui theme to use with the theme and variables needed.
+$cover-ui-theme: cui.define-theme($theme, $variables);
+
+// Creates the styles with the default values.
+@include cui.use-theme($cover-ui-theme);

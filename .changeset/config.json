@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.0.1/schema.json",
+  "changelog": "@changesets/changelog-git",
+  "commit": false,
+  "fixed": [["@cover-ui/css", "@cover-ui/sass", "@cover-ui/storybook"]],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": ["config", "tsconfig", "docs", "@cover-ui/storybook"]
+}
