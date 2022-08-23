@@ -1,6 +1,6 @@
 {
   "name": "@cover-ui/css",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Deft+",
   "description": "Modern CSS framework based on Flexbox",
   "main": "cover-ui.min.css",

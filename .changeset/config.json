@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["config", "tsconfig", "docs", "@cover-ui/storybook"]
+  "ignore": []
 }

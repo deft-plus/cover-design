@@ -1,6 +1,6 @@
 {
   "version": "0.2",
-  "ignorePaths": ["package-lock.json", "node_modules", ".git/objects", ".vscode", ".next"],
   "allowCompoundWords": true,
-  "words": ["fullhd", "jgthms", "nextjs"]
+  "ignorePaths": ["yarn-lock", "node_modules", ".git/objects", ".vscode", ".next"],
+  "words": ["fullhd", "jgthms", "nextjs", "tsup"]
 }
